@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS pizzas_orders CASCADE;
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
-  phone_number VARCHAR(10) NOT NULL,
+  phone_number VARCHAR(12) NOT NULL,
   received_at TIMESTAMP,
   completed_at TIMESTAMP,
   order_status VARCHAR(50) SET DEFAULT 'order incomplete'
