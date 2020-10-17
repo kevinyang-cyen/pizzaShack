@@ -1,6 +1,6 @@
 -- Users table seeds here (Example)
-INSERT INTO orders (name, phone_number, received_at, completed_at, order_status)
-VALUES ('Alice Wonderland', '+16502414473', '2018-02-12T08:13:20.000Z', '2018-02-12T08:13:20.000Z', ),
+INSERT INTO orders (name, phone_number)
+VALUES ('Alice Wonderland', '+16502414473'),
 ('Lebron James', '+16502414473'),
 ('Ash Ketchum', '+16502414473');
 
@@ -11,5 +11,5 @@ INSERT INTO pizzas (name, price, ingredients) VALUES
 
 INSERT INTO pizzas_orders(pizza_id, order_id, quantity)
 VALUES (1, 2, 3),
-(2, 2, 1)
+(2, 2, 1),
 (3, 1, 1);
