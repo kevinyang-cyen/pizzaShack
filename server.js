@@ -51,3 +51,8 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+//nick test
+app.get("/order",(req,res) => {
+  res.render("order_page_template")
+});
