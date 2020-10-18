@@ -95,8 +95,8 @@ app.get("/", (req, res) => {
   res.render("home_page", templateVars)
 })
 //twiollio test
-var accountSid = 'AC092aeed37eddfce667207c8cba057ea7'; // Your Account SID from www.twilio.com/console
-var authToken = '2bb8cf4bf758f09bd684910a77644037';   // Your Auth Token from www.twilio.com/console
+var accountSid = ; // Your Account SID from www.twilio.com/console
+var authToken = ;   // Your Auth Token from www.twilio.com/console
 
 var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
