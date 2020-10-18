@@ -2,13 +2,13 @@
 require('dotenv').config();
 
 // Web server config
-const PORT       = process.env.PORT || 8080;
-const ENV        = process.env.ENV || "development";
-const express    = require("express");
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
 const bodyParser = require("body-parser");
-const sass       = require("node-sass-middleware");
-const app        = express();
-const morgan     = require('morgan');
+const sass = require("node-sass-middleware");
+const app = express();
+const morgan = require('morgan');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -44,7 +44,7 @@ app.use("/api/orders", ordersRoutes(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
+app.get("/a", (req, res) => {
   res.render("index");
 });
 
@@ -53,7 +53,7 @@ app.listen(PORT, () => {
 });
 
 const pizzas = {
-  'pepperoni':{
+  'pepperoni': {
     name: 'pepperoni',
     cost: 34.50,
     time: "15 minutes",
@@ -61,15 +61,36 @@ const pizzas = {
   }
 }
 //nick test
-app.get("/order",(req,res) => {
+app.get("/order", (req, res) => {
   const pizzas = {
-    'pepperoni':{
+    'pepperoni': {
       name: 'pepperoni',
       cost: 34.50,
       time: "15 minutes",
       toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
     }
   }
-  const templateVars = pizzas;
+  const templateVars = { pizzas };
   res.render("order_page_template", templateVars);
 });
+//kevin
+app.get("/status", (req, res) => {
+  const templateVars = {};
+  res.render("order_status", templateVars);
+})
+
+
+
+///home page
+app.get("/", (req, res) => {
+  const pizzas = {
+    'pepperoni': {
+      name: 'pepperoni',
+      cost: 34.50,
+      time: "15 minutes",
+      ingredients: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
+    }
+  }
+  const templateVars = {pizzas};
+  res.render("home_page", templateVars)
+})
