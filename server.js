@@ -94,3 +94,30 @@ app.get("/", (req, res) => {
   const templateVars = {pizzas};
   res.render("home_page", templateVars)
 })
+//twiollio test
+var accountSid = 'AC092aeed37eddfce667207c8cba057ea7'; // Your Account SID from www.twilio.com/console
+var authToken = '2bb8cf4bf758f09bd684910a77644037';   // Your Auth Token from www.twilio.com/console
+
+var twilio = require('twilio');
+var client = new twilio(accountSid, authToken);
+
+app.post("/", (req,res)=>{
+
+  client.messages.create({
+    body: 'Hello from Node',
+    to: '16044457299',  // Text this number
+    from: '+16502414473' // From a valid Twilio number
+  })
+  .then((message) => {
+    console.log("text sent")
+    res.redirect("/")
+    console.log(message.sid)});
+
+  });
+  // client.messages.create({
+  //   body: 'Hello from Node',
+  //   to: '+16044457299',  // Text this number
+  //   from: '+16502414473' // From a valid Twilio number
+  // })
+  // .then((message) => console.log(message.sid));
+  //  console.log("text sent2")
