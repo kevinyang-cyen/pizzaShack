@@ -52,7 +52,24 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
+const pizzas = {
+  'pepperoni':{
+    name: 'pepperoni',
+    cost: 34.50,
+    time: "15 minutes",
+    toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
+  }
+}
 //nick test
 app.get("/order",(req,res) => {
-  res.render("order_page_template")
+  const pizzas = {
+    'pepperoni':{
+      name: 'pepperoni',
+      cost: 34.50,
+      time: "15 minutes",
+      toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
+    }
+  }
+  const templateVars = pizzas;
+  res.render("order_page_template", templateVars);
 });

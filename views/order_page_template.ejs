@@ -12,34 +12,37 @@
 <body>
   <div>
     <h3>Your Order</h3>
-    <p> Your Pizza Name
-      Price
+
+    <!-- <p><% for (let pizza in pizzas){ %>
+       ${pizza.name}
       approx time of delivery
-      ingredients </p>
+      ingredients
+    <% } %>
+    </p> -->
+      <img src="https://picsum.photos/250">
     <div>
       <button type="button" class="btn btn-danger">Delete</button>
     </div>
 
+    <div>
+      <button type="button" class="btn btn-warning">Add Your Details Here</button>
+    </div>
 
     <div>
       <form>
         <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <label for="exampleInputPhone">Contact Number </label>
+          <input type="phoneNumber" class="form-control" placeholder="Enter Phone Number">
+          <small id="privacy message" class="form-text text-muted">We'll never share your phone number with anyone
+            else.... We promise</small>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <label for="exampleInputPassword1">Name</label>
+          <input type="name" class="form-control" placeholder="First Name and Last Inital">
         </div>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
 
+        <button type="submit" class="btn btn-info">Place Order</button>
+      </form>
     </div>
 
 
