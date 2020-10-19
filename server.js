@@ -115,10 +115,4 @@ app.post("/order", (req,res)=>{
     console.log(message.sid)});
 
   });
-  // client.messages.create({
-  //   body: 'Hello from Node',
-  //   to: '+16044457299',  // Text this number
-  //   from: '+16502414473' // From a valid Twilio number
-  // })
-  // .then((message) => console.log(message.sid));
-  //  console.log("text sent2")
+
