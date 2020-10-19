@@ -71,9 +71,11 @@ app.get("/order", (req, res) => {
       toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
     }
   }
-  const templateVars = { pizzas };
+  const chosenPizzas = cart;
+  const templateVars = { pizzas, chosenPizzas};
   res.render("order_page_template", templateVars);
 });
+
 //kevin
 app.get("/status", (req, res) => {
   const templateVars = {};
