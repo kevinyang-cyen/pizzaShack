@@ -102,6 +102,7 @@ const toNumber = process.env.TO_NUMBER;
 var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
 
+
 app.post("/order", (req,res)=>{
 
   client.messages.create({
@@ -114,5 +115,9 @@ app.post("/order", (req,res)=>{
     res.redirect("/")
     console.log(message.sid)});
 
-  });
+});
+
+app.post('/status', (req, res) => {
+  console.log(req.body.Body);
+});
 
