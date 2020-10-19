@@ -13,7 +13,7 @@ CREATE TABLE orders (
 CREATE TABLE pizzas (
 id SERIAL PRIMARY KEY NOT NULL,
 name VARCHAR(255) NOT NULL,
-price decimal(3,2),
+price decimal(6,2),
 ingredients TEXT,
 image_url TEXT DEFAULT 'http://placekitten.com/125/125'
 );
