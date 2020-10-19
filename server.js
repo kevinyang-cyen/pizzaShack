@@ -16,7 +16,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 //dynamic cart object
-const cart = {}
+const cart = {items:[1]}
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -71,16 +71,20 @@ app.get("/order", (req, res) => {
       toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
     }
   }
-  const chosenPizzas = cart;
+  const chosenPizzas = {}
   const templateVars = { pizzas, chosenPizzas };
 
-  pool.query(`
+  db.query(`
     SELECT *
     FROM pizzas
     WHERE id = 1;
     `)
     .then(res => {
       console.log(res);
+      console.log("PIZZA 1")
+      res.forEach(element => {
+        chosenPizzas = element;
+      });
     })
     .catch(err => console.error('query error', err.stack));
 
