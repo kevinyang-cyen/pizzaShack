@@ -10,10 +10,11 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM orders;`)
+    db.query(`SELECT * FROM pizzas;`)
       .then(data => {
-        const orders = data.rows;
-        res.json({ orders });
+        const pizzas = data.rows;
+        const templateVars = { pizzas }
+        res.render("home_page", templateVars)
       })
       .catch(err => {
         res

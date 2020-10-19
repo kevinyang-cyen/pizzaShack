@@ -37,7 +37,7 @@ const ordersRoutes = require("./routes/orders");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/orders", ordersRoutes(db));
+app.use("/", ordersRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -79,21 +79,6 @@ app.get("/status", (req, res) => {
   res.render("order_status", templateVars);
 })
 
-
-
-///home page
-app.get("/", (req, res) => {
-  const pizzas = {
-    'pepperoni': {
-      name: 'pepperoni',
-      cost: 34.50,
-      time: "15 minutes",
-      ingredients: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
-    }
-  }
-  const templateVars = {pizzas};
-  res.render("home_page", templateVars)
-})
 //twilio test
 var accountSid = process.env.TWILIO_SID; // Your Account SID from www.twilio.com/console
 var authToken = process.env.TWILIO_TOKEN;   // Your Auth Token from www.twilio.com/console
