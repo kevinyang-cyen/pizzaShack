@@ -94,18 +94,19 @@ app.get("/", (req, res) => {
   const templateVars = {pizzas};
   res.render("home_page", templateVars)
 })
-//twiollio test
-var accountSid = ; // Your Account SID from www.twilio.com/console
-var authToken = ;   // Your Auth Token from www.twilio.com/console
+//twilio test
+var accountSid = process.env.TWILIO_SID; // Your Account SID from www.twilio.com/console
+var authToken = process.env.TWILIO_TOKEN;   // Your Auth Token from www.twilio.com/console
+const toNumber = process.env.TO_NUMBER;
 
 var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
 
-app.post("/", (req,res)=>{
+app.post("/order", (req,res)=>{
 
   client.messages.create({
     body: 'Hello from Node',
-    to: '',  // Text this number
+    to: `${toNumber}`,  // Text this number
     from: '+16502414473' // From a valid Twilio number
   })
   .then((message) => {
