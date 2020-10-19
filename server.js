@@ -72,7 +72,18 @@ app.get("/order", (req, res) => {
     }
   }
   const chosenPizzas = cart;
-  const templateVars = { pizzas, chosenPizzas};
+  const templateVars = { pizzas, chosenPizzas };
+
+  pool.query(`
+    SELECT *
+    FROM pizzas
+    WHERE id = 1;
+    `)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => console.error('query error', err.stack));
+
   res.render("order_page_template", templateVars);
 });
 
@@ -94,7 +105,7 @@ app.get("/", (req, res) => {
       ingredients: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
     }
   }
-  const templateVars = {pizzas};
+  const templateVars = { pizzas };
   res.render("home_page", templateVars)
 })
 //twilio test
@@ -106,17 +117,18 @@ var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
 
 
-app.post("/order", (req,res)=>{
+app.post("/order", (req, res) => {
 
   client.messages.create({
     body: 'Hello from Node',
     to: `${toNumber}`,  // Text this number
     from: '+16502414473' // From a valid Twilio number
   })
-  .then((message) => {
-    console.log("text sent")
-    res.redirect("/")
-    console.log(message.sid)});
+    .then((message) => {
+      console.log("text sent")
+      res.redirect("/")
+      console.log(message.sid)
+    });
 
 });
 
