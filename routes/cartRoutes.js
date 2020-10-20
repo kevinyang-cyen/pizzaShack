@@ -9,8 +9,9 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.post("/idg", (req, res) => {
-    req.params
+  router.post("/", (req, res) => {
+    console.log(res)
+    console.log('almost there bro')
   });
   return router;
 };
