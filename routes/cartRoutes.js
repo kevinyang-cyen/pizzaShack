@@ -10,7 +10,12 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
+<<<<<<< HEAD
     req.params;
+=======
+    console.log(res)
+    console.log('almost there bro')
+>>>>>>> cartRoutes
   });
   return router;
 };
