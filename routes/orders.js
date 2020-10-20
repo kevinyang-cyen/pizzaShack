@@ -4,21 +4,13 @@
  *   these routes are mounted onto /orders
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
-
+const cart = require('./cart');
 const express = require('express');
 const router  = express.Router();
 
 module.exports = (db, inProgressOrder) => {
   router.get("/", (req, res) => {
 
-    // res.render("home_page", {pizzas:[{
-    //     'pepperoni': {
-    //       name: 'pepperoni',
-    //       cost: 34.50,
-    //       time: "15 minutes",
-    //       toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
-    //     }
-    //   }]})
     db.query(`SELECT * FROM pizzas;`)
       .then(data => {
         const pizzas = data.rows;
@@ -31,6 +23,15 @@ module.exports = (db, inProgressOrder) => {
           .json({ error: err.message });
       });
 
+  });
+
+
+  router.post("/", (req, res) => {
+    const pizza = Object.keys(req.body).toString()
+    const quantity = req.body[pizza];
+    cart[pizza] = quantity;
+    res.redirect("/")
+    
   });
   return router;
 };

@@ -16,6 +16,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
 db.connect();
+<<<<<<< HEAD
 //dynamic cart object
 const cart = {
   'Pepperoni':1,
@@ -23,6 +24,9 @@ const cart = {
   'Meat Lovers':2
 };
 module.exports = {cart};
+=======
+
+>>>>>>> master
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -41,8 +45,14 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const ordersRoutes = require("./routes/orders");
+<<<<<<< HEAD
 const getCart = require('./routes/orders3.js');
 const statusRoutes = require("./routes/status");
+=======
+const statusRoutes = require("./routes/status");
+const getCart = require('./routes/orders3.js')
+const cartRoutes = require('./routes/cartRoutes.js');
+>>>>>>> master
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 const inProgressOrder = false;
@@ -50,6 +60,10 @@ const inProgressOrder = false;
 app.use("/", ordersRoutes(db, inProgressOrder));
 app.use("/order",getCart(db));
 app.use("/status",statusRoutes(db));
+<<<<<<< HEAD
+=======
+app.use("/modify", cartRoutes(db));
+>>>>>>> master
 // Note: mount other resources here, using the same pattern above
 
 app.listen(PORT, () => {
