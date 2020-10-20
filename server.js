@@ -71,8 +71,7 @@ app.get("/order", (req, res) => {
       toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
     }
   }
-  const chosenPizzas = {}
-  const templateVars = { pizzas, chosenPizzas };
+  let templateVars = { pizzas};
 
   db.query(`
     SELECT *
@@ -80,11 +79,10 @@ app.get("/order", (req, res) => {
     WHERE id = 1;
     `)
     .then(res => {
-      console.log(res);
-      console.log("PIZZA 1")
-      res.forEach(element => {
-        chosenPizzas = element;
-      });
+      console.log(res.rows[0]);
+      // res.render("order_page_template", {pizzas:res.rows[0]})
+
+
     })
     .catch(err => console.error('query error', err.stack));
 
