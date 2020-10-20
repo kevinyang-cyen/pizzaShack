@@ -9,14 +9,18 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
+  router.get("/status", (req, res) => {
     db.query(`
-      SELECT * FROM pizzas;
+    SELECT orders.id, pizzas.name as name, price, image_url, orders.order_status, pizzas_orders.quantity
+    FROM pizzas
+    JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
+    JOIN orders ON pizzas_orders.order_id = orders.id
+    WHERE orders.id = 2;
     `)
       .then(data => {
-        const pizzas = data.rows;
-        const templateVars = { pizzas }
-        res.render("home_page", templateVars)
+        const orderList = data.rows;
+        const templateVars = { orderList }
+        res.render("order_status", templateVars)
       })
       .catch(err => {
         res
@@ -26,3 +30,5 @@ module.exports = (db) => {
   });
   return router;
 };
+
+

@@ -15,22 +15,22 @@
     <main>
       <h1>Your Order</h1>
         <article>
+          <%= for(let item in orderList) { %>
           <tr>
-            <td><img src="https://picsum.photos/250" alt='image here'></td>
+            <td><img src=<% item.image_url> alt='image here'></td>
             <td>
-              <tr>orderList.quantity x orderList.name</tr>
-              <tr>orderList.quantity x orderList.price</tr>
-              <tr>Approx. orderList.waitTime</tr>
-              <tr>orderList.ingredients</tr>
+              <tr><% item.quantity> x <%item.name></tr>
+              <tr><% item.quantity> x <%item.price></tr>
+              <tr><% item.ingredients></tr>
             </td>
           </tr>
+          <%= } %>
       </article>
       <form method="POST" action="/status">
         <button type="submit" class="btn btn-info">Test</button>
       </form>
-      <p>${order_status}</p>
-      <h1>Your Order Status: orderList.status</h1>
-      <h1>Estimated Total Time: orderList.status</h1>
+      <h1>Your Order Status: <% orderList.status>></h1>
+      <h1>Estimated Total Time: </h1>
     </main>
   </body>
 </html>
