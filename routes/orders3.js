@@ -25,7 +25,9 @@ module.exports = (db) => {
 
 
     console.log(pizzaInCart, 'PIZZA in CART');
-    db.query(`SELECT * from pizzas WHERE name = ANY(array${pizzaInCart});`)
+    const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`
+    console.log(query, "query");
+    db.query(query)
       .then(data => {
         const pizzas = data.rows;
         const templateVars = { pizzas, cart };
