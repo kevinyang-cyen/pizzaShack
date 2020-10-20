@@ -9,7 +9,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/status", (req, res) => {
+  router.get("/", (req, res) => {
     db.query(`
     SELECT orders.id, pizzas.name as name, price, image_url, orders.order_status, pizzas_orders.quantity
     FROM pizzas
@@ -18,8 +18,9 @@ module.exports = (db) => {
     WHERE orders.id = 2;
     `)
       .then(data => {
-        const orderList = data.rows;
-        const templateVars = { orderList }
+        const orderLists = data.rows;
+        const templateVars = {orderLists};
+        console.log(templateVars);
         res.render("order_status", templateVars)
       })
       .catch(err => {
