@@ -59,7 +59,7 @@ const inProgressOrder = false;
 
 app.use("/", ordersRoutes(db, inProgressOrder));
 app.use("/order",getCart(db));
-app.use("/status",statusRoutes(db));
+app.use("/status",statusRoutes(db, inProgressOrder));
 // Note: mount other resources here, using the same pattern above
 
 app.listen(PORT, () => {
