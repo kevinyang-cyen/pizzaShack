@@ -12,17 +12,17 @@
 <body>
   <div>
     <h3>Your Order</h3>
-<p>
-  <% for( let pizza of pizzas) {%>
+    <article>
+      <% for( let pizza of pizzas) {%>
       <h2> <%= pizza.name %> </h2>
-      <img src=<%=pizza.image_url %> >
-    Ingredients:<%= pizza.ingredients%>
-    Price $<%= pizza.price%>
-      approx time of delivery
+      <img src=<%=pizza.image_url %>>
+      Ingredients:<%= pizza.ingredients%>
+      Price: $<%= pizza.price %>
+      Approx time of delivery <!--insert-->
       ingredients
-<% } %>
-    </p>
-      <img src="https://picsum.photos/250">
+      <% } %>
+    </article>
+    <img src="https://picsum.photos/250">
     <div>
       <button type="button" class="btn btn-danger">Delete</button>
     </div>
