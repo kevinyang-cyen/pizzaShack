@@ -14,6 +14,7 @@ const morgan = require('morgan');
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
+
 db.connect();
 //dynamic cart object
 const cart = {items:[1]}
@@ -35,10 +36,11 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const ordersRoutes = require("./routes/orders");
-
+const getCart = require('./routes/orders3.js')
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/orders", ordersRoutes(db));
+app.use("/order",getCart(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -62,32 +64,32 @@ const pizzas = {
   }
 }
 //nick test
-app.get("/order", (req, res) => {
-  const pizzas = {
-    'pepperoni': {
-      name: 'pepperoni',
-      cost: 34.50,
-      time: "15 minutes",
-      toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
-    }
-  }
-  let templateVars = { pizzas};
+// app.get("/order", (req, res) => {
+//   const pizzas = {
+//     'pepperoni': {
+//       name: 'pepperoni',
+//       cost: 34.50,
+//       time: "15 minutes",
+//       toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
+//     }
+//   }
+//   let templateVars = { pizzas};
 
-  db.query(`
-    SELECT *
-    FROM pizzas
-    WHERE id = 1;
-    `)
-    .then(res => {
-      console.log(res.rows[0]);
-      // res.render("order_page_template", {pizzas:res.rows[0]})
+//   db.query(`
+//     SELECT *
+//     FROM pizzas
+//     WHERE id = 1;
+//     `)
+//     .then(res => {
+//       console.log(res.rows[0]);
+//       // res.render("order_page_template", {pizzas:res.rows[0]})
 
 
-    })
-    .catch(err => console.error('query error', err.stack));
+//     })
+//     .catch(err => console.error('query error', err.stack));
 
-  res.render("order_page_template", templateVars);
-});
+//   res.render("order_page_template", templateVars);
+// });
 
 //kevin
 app.get("/status", (req, res) => {

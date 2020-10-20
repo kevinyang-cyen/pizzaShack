@@ -13,12 +13,14 @@
   <div>
     <h3>Your Order</h3>
 <p>
-
-       <%= pizzas.pepperoni.toppings %>
-
+  <% for( let pizza of pizzas) {%>
+      <h2> <%= pizza.name %> </h2>
+      <img src=<%=pizza.image_url %> >
+    Ingredients:<%= pizza.ingredients%>
+    Price $<%= pizza.price%>
       approx time of delivery
       ingredients
-
+<% } %>
     </p>
       <img src="https://picsum.photos/250">
     <div>
