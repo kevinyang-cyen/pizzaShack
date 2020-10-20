@@ -11,11 +11,16 @@ const cart = require("./cart.js");
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
+<<<<<<< HEAD
     console.log(res.body)
     console.log(req.params)
     console.log('almost there bro')
     templateVars = {cart}
     res.render("order_page_template", templateVars)
+=======
+    console.log(res)
+    console.log('almost there bro')
+>>>>>>> master
   });
   return router;
 };
