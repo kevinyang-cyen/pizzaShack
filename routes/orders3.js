@@ -10,7 +10,7 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM pizzas where id = 1;`)
+    db.query(`SELECT * FROM pizzas Where id = 1 ;`)
       .then(data => {
         const pizzas = data.rows;
         const templateVars = {pizzas};
