@@ -37,7 +37,9 @@ const ordersRoutes = require("./routes/orders");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/", ordersRoutes(db));
+//variable inProgressOrder controls whether a user has added any pizzas to cart or not. If true, they have. If false they have not.
+const inProgressOrder = false;
+app.use("/", ordersRoutes(db, inProgressOrder));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -51,6 +53,7 @@ app.get("/a", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
 
 const pizzas = {
   'pepperoni': {

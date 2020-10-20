@@ -8,12 +8,12 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = (db, inProgressOrder) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM pizzas;`)
       .then(data => {
         const pizzas = data.rows;
-        const templateVars = { pizzas }
+        const templateVars = { pizzas, inProgressOrder }
         res.render("home_page", templateVars)
       })
       .catch(err => {
