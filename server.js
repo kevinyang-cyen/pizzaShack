@@ -34,10 +34,12 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const ordersRoutes = require("./routes/orders");
+// const statusRoutes = require("./routes/status");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/orders", ordersRoutes(db));
+// app.use("/api/status", statusRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -74,9 +76,27 @@ app.get("/order", (req, res) => {
   res.render("order_page_template", templateVars);
 });
 //kevin
+const getUserOrderStatus = function() {
+  console.log('function executing..')
+  return db.query(`SELECT orders.id, pizzas.name as name, price, image_url, orders.order_status, pizzas_orders.quantity
+  FROM pizzas
+  JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
+  JOIN orders ON pizzas_orders.order_id = orders.id
+  WHERE orders.id = 2;`)
+    .then(res => console.log(res))
+    .catch(e => console.log(e))
+};
+
 app.get("/status", (req, res) => {
-  const templateVars = {};
-  res.render("order_status", templateVars);
+
+  getUserOrderStatus()
+  .then(res => {
+    console.log(res);
+    const templateVars = {order_status};
+    res.render("order_status", templateVars)
+  })
+  // const templateVars = {};
+  // res.render("order_status", templateVars);
 })
 
 
