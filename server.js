@@ -17,7 +17,14 @@ const db = new Pool(dbParams);
 
 db.connect();
 //dynamic cart object
-const cart = {items:[1]}
+const cart = {
+  'pepperoni': {
+    name: 'pepperoni',
+    quantity: 0
+
+
+  }
+}}
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -55,14 +62,7 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-const pizzas = {
-  'pepperoni': {
-    name: 'pepperoni',
-    cost: 34.50,
-    time: "15 minutes",
-    toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
-  }
-}
+
 //nick test
 // app.get("/order", (req, res) => {
 //   const pizzas = {
