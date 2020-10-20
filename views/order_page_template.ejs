@@ -13,17 +13,23 @@
   <%- include('partials/_header') %>
   <div>
     <h3>Your Order</h3>
-<p>
-    for (let pizza in pizzas)
-       {pizza.name}
-      approx time of delivery
-      ingredients
-
-    </p>
-      <img src="https://picsum.photos/250">
-    <div>
-      <button type="button" class="btn btn-danger">Delete</button>
-    </div>
+    <article>
+      <% for( let pizza of pizzas) {%>
+      <h2> <%= pizza.name %> </h2>
+      <h4>Quantity</h4>
+      <img src=<%=pizza.image_url %>>
+      <div>
+        <h5>Ingredients:<%= pizza.ingredients%></h5>
+        <h5>Price: $<%= pizza.price %></h5>
+        <h5>Approx time of delivery</h5>
+        <!--insert-->
+        <div>
+          <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+      <% } %>
+    </article>
+    <img src="https://picsum.photos/100">
 
     <div>
       <button type="button" class="btn btn-warning">Add Your Details Here</button>
@@ -34,7 +40,8 @@
         <div class="form-group">
           <label for="exampleInputPhone">Contact Number </label>
           <input type="phoneNumber" class="form-control" placeholder="Enter Phone Number">
-          <small id="privacy message" class="form-text text-muted">We'll never share your phone number with anyone
+          <small id="privacy message" class="form-text text-muted">
+            We'll never share your phone number with anyone
             else.... We promise</small>
         </div>
         <div class="form-group">
