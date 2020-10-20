@@ -1,24 +1,18 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-success">
-    <a class="navbar-brand" href="/urls">Pizza Shack</a>
+    <a class="navbar-brand" href="/">Pizza Shack</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     </div>
-    <% if(!inProgressOrder){ %>
-      <form class="form-inline" action="/login" method="GET">
-        <div class="form-group mb-2">
-          <label for="view-cart"></label>
-          <!-- <input class="form-control" type="text" name="username" placeholder="username" style="width: 300px; margin: 1em; text-align:left"> -->
-          <button type="submit" style="margin-right: 10px;" class="btn btn-outline-dark">Add a pizza dum dum</button>
-        </div>
-      </form>
+    <% if(status.status === false){ %>
+      <p>Add a pizza to get started</p>
       <% } else { %> 
-      <form class="form-inline" action="/logout" method="POST">
+      <form class="form-inline" action="/order" method="GET">
         <div class="form-group mb-2">
-          <label for="no-items-in-cart" style="margin-right: 10px"></label>
-          <button type="submit" class="btn btn-outline-dark">View Cart</button>
+          <label for="items-in-cart" style="margin-right: 10px"></label>
+          <button type="submit" class="btn btn-outline-dark">View Cart (<%= quantity.qty %>)</button>
         </div>
       </form>
       <% } %>

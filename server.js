@@ -40,9 +40,9 @@ const getCart = require('./routes/orders3.js')
 const cartRoutes = require('./routes/cartRoutes.js');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-const inProgressOrder = false;
 
-app.use("/", ordersRoutes(db, inProgressOrder));
+
+app.use("/", ordersRoutes(db));
 app.use("/order",getCart(db));
 app.use("/status",statusRoutes(db));
 app.use("/modify", cartRoutes(db));
