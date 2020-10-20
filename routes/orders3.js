@@ -24,7 +24,7 @@ module.exports = (db) => {
       .then(data => {
         const pizzas = data.rows;
         const templateVars = {pizzas,cart};
-
+        console.log(cart)
         res.render("order_page_template", templateVars);
       })
       .catch(err => {
