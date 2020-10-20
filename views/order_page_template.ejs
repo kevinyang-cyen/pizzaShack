@@ -13,7 +13,8 @@
   <div>
     <h3>Your Order</h3>
     <article>
-      <% for( let pizza of pizzas) {%>
+      <% for( let pizza of pizzas) { %>
+        <% for (let item in cart) { %>
       <h2> <%= pizza.name %> </h2>
       <h4>Quantity</h4>
       <img src=<%=pizza.image_url %>>
@@ -21,9 +22,12 @@
         <h5>Ingredients:<%= pizza.ingredients%></h5>
         <h5>Price: $<%= pizza.price %></h5>
         <h5>Approx time of delivery</h5>
+        <label for="pizzaQuantity">Quantity <%= cart.[pizza] %> </label>
+        <input type="text" class="form-control" placeholder=" <%= item.pizza %> ">
+        <% } %>
         <!--insert-->
         <div>
-          <button type="button" class="btn btn-danger">Delete</button>
+          <button type="submit" method="POST" type="/modify"class="btn btn-danger">Delete</button>
         </div>
       </div>
       <% } %>

@@ -7,11 +7,15 @@
 
 const express = require('express');
 const router  = express.Router();
+const cart = require("../server.js");
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-    console.log(res)
+    console.log(res.body)
+    console.log(req.params)
     console.log('almost there bro')
+    templateVars = {cart}
+    res.render("order_page_template", templateVars)
   });
   return router;
 };

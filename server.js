@@ -18,21 +18,11 @@ const db = new Pool(dbParams);
 db.connect();
 //dynamic cart object
 const cart = {
-  'pepperoni': {
-    name: 'pepperoni',
-    quantity: 0
-  },
-  'The Terminator':{
-    name:'The Terminator',
-    quantity:0
-  },
-  'Meat Lovers':{
-    name:'Meat Lovers',
-    quantity:0
-  }
-
-
+  'Pepperoni':1,
+  'The Terminator':3,
+  'Meat Lovers':2
 };
+module.exports = cart;
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.

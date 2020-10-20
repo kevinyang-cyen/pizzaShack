@@ -7,6 +7,8 @@
 
 const express = require('express');
 const router  = express.Router();
+const cart = require("../server.js");
+
 
 //twilio
 let accountSid = process.env.TWILIO_SID; // Your Account SID from www.twilio.com/console
@@ -18,10 +20,10 @@ let client = new twilio(accountSid, authToken);
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM pizzas Where id = 1 ;`)
+    db.query(`SELECT * FROM pizzas;`)
       .then(data => {
         const pizzas = data.rows;
-        const templateVars = {pizzas};
+        const templateVars = {pizzas,cart};
 
         res.render("order_page_template", templateVars);
       })
