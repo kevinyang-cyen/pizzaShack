@@ -8,6 +8,14 @@
 const express = require('express');
 const router  = express.Router();
 
+//twilio
+let accountSid = process.env.TWILIO_SID; // Your Account SID from www.twilio.com/console
+let authToken = process.env.TWILIO_TOKEN;   // Your Auth Token from www.twilio.com/console
+const toNumber = process.env.TO_NUMBER;
+
+let twilio = require('twilio');
+let client = new twilio(accountSid, authToken);
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM pizzas Where id = 1 ;`)
@@ -23,5 +31,22 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.post("/", (req, res) => {
+
+    client.messages.create({
+      body: 'Hello from Node',
+      to: `${toNumber}`,  // Text this number
+      from: '+16502414473' // From a valid Twilio number
+    })
+      .then((message) => {
+        console.log("text sent");
+        res.redirect("/status");
+        console.log(message.sid);
+      });
+
+  });
+
+
   return router;
 };

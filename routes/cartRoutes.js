@@ -10,7 +10,7 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-    req.params
+    req.params;
   });
   return router;
 };

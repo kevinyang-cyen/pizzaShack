@@ -22,8 +22,8 @@ module.exports = (db, inProgressOrder) => {
     db.query(`SELECT * FROM pizzas;`)
       .then(data => {
         const pizzas = data.rows;
-        const templateVars = { pizzas, inProgressOrder }
-        res.render("home_page", templateVars)
+        const templateVars = { pizzas, inProgressOrder };
+        res.render("home_page", templateVars);
       })
       .catch(err => {
         res
