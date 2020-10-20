@@ -52,8 +52,8 @@ module.exports = (db, inProgressOrder) => {
           FROM pizzas
           JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
           JOIN orders ON pizzas_orders.order_id = orders.id) as subquery
-          WHERE orders.phone_number = '+16502414473';
-      `)
+          WHERE orders.phone_number = $1;
+      `, [phoneNumber])
       .then(data => {res.json(data)})
       .catch(e => res.json({error: e.message }));
     }
@@ -66,8 +66,8 @@ module.exports = (db, inProgressOrder) => {
           FROM pizzas
           JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
           JOIN orders ON pizzas_orders.order_id = orders.id) as subquery
-          WHERE orders.phone_number = '+16502414473';
-      `)
+          WHERE orders.phone_number = $1;
+      `, [phoneNumber])
       .then(data => {res.json(data)})
       .catch(e => res.json({error: e.message }));
     }
