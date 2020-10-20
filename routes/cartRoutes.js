@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const cart = require("../server.js");
+const cart = require("./cart.js");
 
 module.exports = (db) => {
   router.post("/", (req, res) => {

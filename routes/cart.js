@@ -1,7 +1,7 @@
 const cart = {
-  'Pepperoni':0,
-  'The Terminator':0,
-  'Meat Lovers':0
+  'Pepperoni':1,
+  'The Terminator':1,
+  'Meat Lovers':2
 };
 
 module.exports = cart ;
