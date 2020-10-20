@@ -9,7 +9,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.post("/", (req, res) => {
+  router.post("/idg", (req, res) => {
     req.params
   });
   return router;
