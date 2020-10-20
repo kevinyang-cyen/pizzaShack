@@ -54,14 +54,8 @@ const ordersRoutes = require("./routes/orders");
 const getCart = require('./routes/orders3.js')
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-<<<<<<< HEAD
-//variable inProgressOrder controls whether a user has added any pizzas to cart or not. If true, they have. If false they have not.
-const inProgressOrder = false;
-app.use("/", ordersRoutes(db, inProgressOrder));
-=======
-app.use("/api/orders", ordersRoutes(db));
+app.use("/", ordersRoutes(db));
 app.use("/order",getCart(db));
->>>>>>> f14394a5c17d184e1c714c08c666e6ba83c15baf
 // Note: mount other resources here, using the same pattern above
 
 
@@ -77,17 +71,6 @@ app.listen(PORT, () => {
 });
 
 
-<<<<<<< HEAD
-const pizzas = {
-  'pepperoni': {
-    name: 'pepperoni',
-    cost: 34.50,
-    time: "15 minutes",
-    toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
-  }
-}
-=======
->>>>>>> f14394a5c17d184e1c714c08c666e6ba83c15baf
 //nick test
 // app.get("/order", (req, res) => {
 //   const pizzas = {
