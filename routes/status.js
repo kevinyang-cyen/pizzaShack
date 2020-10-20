@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
-let minutes = 5;
+let minutes = 0;
 
 //twilio
 let accountSid = process.env.TWILIO_SID; // Your Account SID from www.twilio.com/console
@@ -40,11 +40,11 @@ module.exports = (db, inProgressOrder) => {
   });
 
   router.post('/', (req, res) => {
-    let minutes = parseInt(req.body.Body);
-    let phoneNumber = req.body.From.slice(2);
-    console.log(minutes);
+    minutes = parseInt(req.body.Body);
+    let phoneNumber = req.body.From;
 
     if (!minutes) {
+      minutes = 'Sorry your order was declined!';
       db.query(`
         UPDATE orders
         SET order_status = 'declined'
