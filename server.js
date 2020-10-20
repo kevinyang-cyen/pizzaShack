@@ -34,35 +34,36 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const ordersRoutes = require("./routes/orders");
-// const statusRoutes = require("./routes/status");
+const statusRoutes = require("./routes/status");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/orders", ordersRoutes(db));
-// app.use("/api/status", statusRoutes(db));
+app.use("/", ordersRoutes(db));
+app.use("/status", statusRoutes(db));
 // Note: mount other resources here, using the same pattern above
+
 
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/a", (req, res) => {
-  res.render("index");
-});
+// app.get("/a", (req, res) => {
+//   res.render("index");
+// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-const pizzas = {
-  'pepperoni': {
-    name: 'pepperoni',
-    cost: 34.50,
-    time: "15 minutes",
-    toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
-  }
-}
-//nick test
+// const pizzas = {
+//   'pepperoni': {
+//     name: 'pepperoni',
+//     cost: 34.50,
+//     time: "15 minutes",
+//     toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
+//   }
+// }
+// //nick test
 app.get("/order", (req, res) => {
   const pizzas = {
     'pepperoni': {
@@ -86,35 +87,30 @@ const getUserOrderStatus = function() {
     .then(res => console.log(res))
     .catch(e => console.log(e))
 };
+//getUserOrderStatus();
 
-app.get("/status", (req, res) => {
+const selectPizzas = function () {
+  console.log('function running...');
+  db.query(`SELECT * FROM pizzas;`)
+  .then(res => console.log(res))
+  .catch(e => console.log(e))
+}
+selectPizzas();
 
-  getUserOrderStatus()
-  .then(res => {
-    console.log(res);
-    const templateVars = {order_status};
-    res.render("order_status", templateVars)
-  })
-  // const templateVars = {};
-  // res.render("order_status", templateVars);
-})
+// app.get("/status", (req, res) => {
 
+//   // getUserOrderStatus()
+//   // .then(res => {
+//   //   console.log(res);
+//   //   const templateVars = {order_status};
+//   //   res.render("order_status", templateVars)
+//   // })
+//   const templateVars = {};
+//   res.render("order_status", templateVars);
+// })
+// })
 
-
-///home page
-app.get("/", (req, res) => {
-  const pizzas = {
-    'pepperoni': {
-      name: 'pepperoni',
-      cost: 34.50,
-      time: "15 minutes",
-      ingredients: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
-    }
-  }
-  const templateVars = {pizzas};
-  res.render("home_page", templateVars)
-})
-//twilio test
+// //twilio test
 var accountSid = process.env.TWILIO_SID; // Your Account SID from www.twilio.com/console
 var authToken = process.env.TWILIO_TOKEN;   // Your Auth Token from www.twilio.com/console
 const toNumber = process.env.TO_NUMBER;

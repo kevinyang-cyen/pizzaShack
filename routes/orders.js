@@ -10,16 +10,27 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM orders;`)
+
+    // res.render("home_page", {pizzas:[{
+    //     'pepperoni': {
+    //       name: 'pepperoni',
+    //       cost: 34.50,
+    //       time: "15 minutes",
+    //       toppings: 'Handmade bread dough, Marinara Sauce, Four different types of artisanal cheese, hand-sliced pepperoni, garlic butter brushed crust'
+    //     }
+    //   }]})
+    db.query(`SELECT * FROM pizzas;`)
       .then(data => {
-        const orders = data.rows;
-        res.json({ orders });
+        const pizzas = data.rows;
+        const templateVars = { pizzas }
+        res.render("home_page", templateVars)
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
+
   });
   return router;
 };

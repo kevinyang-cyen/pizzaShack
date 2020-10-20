@@ -10,15 +10,15 @@
 
     <main style="margin: 1em;">
       <h3>Our Menu</h3>
-      <% for(let pizza in pizzas) { %>
+      <% for(let pizza of pizzas) { %>
       <div class = pizza-item-container>
-        <img src="${pizza.image_url}" alt="pizza">
+        <img src="<%= pizza.image_url%>" alt="pizza">
         <div class="title-desc">
-          <h4>${pizza.name}</h4>
-          <p>${pizza.ingredients}</p>
+          <h4><%= pizza.name %></h4>
+          <p><%= pizza.ingredients %></p>
         </div>
         <div class="price-addtocart">
-          <p>$${pizza.price}</p>
+          <p><%= pizza.price %></p>
           <form method="POST" action="/">
             <button type="submit" name="add-to-cart" class="btn btn-outline-danger">Add To Cart</button>
           </form>
