@@ -6,17 +6,12 @@
 
 const cartHelper = (cart) => {
   let keys = Object.keys(cart);
-
-  let queryPizza = [];
+  let pizzaInCart = [];
   for (key of keys) {
-    // console.log(key, "key")
-    // console.log(cart[key], "cart of key")
     if (cart[key] > 0) {
-
-      queryPizza.push(key);
+      pizzaInCart.push(key);
     }
   };
-
-  return queryPizza
+  return pizzaInCart
 }
 module.exports = cartHelper;
