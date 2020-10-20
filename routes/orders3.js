@@ -16,26 +16,19 @@ let authToken = process.env.TWILIO_TOKEN;   // Your Auth Token from www.twilio.c
 const toNumber = process.env.TO_NUMBER;
 
 let twilio = require('twilio');
-const { query } = require('express');
+// const { query } = require('express');
 let client = new twilio(accountSid, authToken);
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let queryPizza = cartHelper(cart);
+    let pizzaInCart = cartHelper(cart);
 
 
-    console.log(queryPizza, 'query pizza');
-    db.query(`SELECT * from pizzas where name = any(array${queryPizza});`)
+    console.log(pizzaInCart, 'PIZZA in CART');
+    db.query(`SELECT * from pizzas WHERE name = ANY(array${pizzaInCart});`)
       .then(data => {
         const pizzas = data.rows;
         const templateVars = { pizzas, cart };
-
-
-        // identify cart items with value over  0
-
-        // filter pizzas so it only shows ^ items
-
-        // send that data only to the template
         console.log(templateVars, 'template vars');
         res.render("order_page_template", templateVars);
       })
