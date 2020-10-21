@@ -96,6 +96,16 @@
         $(`#cart-update-${slugName}`).on('submit', updateCart);
       });
     }
+    //nick
+    function attachFormListenersDelete() {
+      const pizzaListSpan = $('#pizza-list');
+      const pizzaList = pizzaListSpan.data('pizzas');
+      pizzaList.split(',').forEach((name) => {
+        const slugName = slugify(name);
+        $(`#cart-delete-${slugName}`).on('submit', deleteItem);
+      });
+    }
+
 
     function updateCart(e) {
       e.preventDefault();
@@ -126,6 +136,18 @@
       // clear cart
       window.clearCart();
     });
+
+    // nick current
+    function deleteItem(e){
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      //const quantity = formData.get('quantity');
+      const pizzaName = formData.get('pizzaName');
+      //console.log({ quantity, pizzaName })
+      window.setCart(pizzaName, 0);
+      console.log('Current cart:', window.userCart);
+      updateCartState();
+    }
 
     // onload
     attachFormListeners();
