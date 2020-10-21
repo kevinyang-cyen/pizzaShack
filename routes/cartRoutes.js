@@ -11,6 +11,9 @@ const cart = require("./cart.js");
 const cartHelper = require("../helperFunctions/cartHelper.js")
 
 module.exports = (db) => {
+  /**
+   * 2. We want this route to only update data and send back the "new cart"
+   */
   router.post("/", (req, res) => {
     console.log(req.params)
     cart[id]= req.params.quantity;
