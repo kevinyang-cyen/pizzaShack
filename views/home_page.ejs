@@ -10,6 +10,7 @@
     <%- include('partials/_header') %>
     <main style="margin: 1em;">
       <h3>Our Menu</h3>
+      <span id="pizza-list" data-pizzas="<%= pizzas.map((p) => p.name).join(',') %>"></span>
       <% for(let pizza of pizzas) { %>
       <div class = pizza-item-container>
         <img src="<%= pizza.image_url%>" alt="pizza">
@@ -19,7 +20,7 @@
         </div>
         <div class="price-addtocart">
           <p>$<%= pizza.price %></p>
-          <form method="POST" id="cart-add">
+          <form method="POST" id="cart-update-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
             <div>
               <label for="quantity">Quantity:</label>
               <input type="hidden" name="pizzaName" value="<%= pizza.name %>" />
@@ -41,14 +42,58 @@
 
 <script>
   $(document).ready(() => {
-    $('#cart-add').on('submit', (e) => {
+
+    function slugify(str) {
+      return str.replace(' ', '-').toLowerCase();
+    }
+
+    function updateCartState() {
+      Object.entries(window.userCart).forEach(([pizzaName, quantity]) => {
+        const slugName = slugify(pizzaName);
+        const quantityLabel = $(`#quantity-${slugName}`);
+        const quantityInput = $(`#quantity-input-${slugName}`);
+        quantityLabel.text(`Quantity ${quantity}`);
+        quantityInput.val(quantity);
+        
+      })
+    }
+
+    function updateHeaderCart() {
+      let count = 0;
+      Object.entries(window.userCart).forEach(([pizzaName, quantity]) => {
+        count += parseInt(quantity);
+      })
+      const quantityLabel = $(`#cart-button`);
+      quantityLabel.text(`View Cart (${count})`);
+    }
+
+    function attachFormListeners() {
+      const pizzaListSpan = $('#pizza-list');
+      const pizzaList = pizzaListSpan.data('pizzas');
+      pizzaList.split(',').forEach((name) => {
+          const slugName = slugify(name);
+          $(`#cart-update-${slugName}`).on('submit', updateCart);
+      });
+    }
+
+
+    function updateCart(e) {
       e.preventDefault();
       const formData = new FormData(e.target);
       const quantity = formData.get('quantity');
       const pizzaName = formData.get('pizzaName');
+      console.log({ quantity, pizzaName })
       window.setCart(pizzaName, quantity);
       console.log('Current cart:', window.userCart);
-    });
+      updateCartState();
+      updateHeaderCart()
+    }
+
+  attachFormListeners();
+  updateCartState();
+  updateHeaderCart()
+
   });
+
 </script>
 </html>

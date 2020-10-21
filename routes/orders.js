@@ -4,7 +4,6 @@
  *   these routes are mounted onto /orders
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
-const { orderChecker, qtyChecker } = require('./order-checker');
 const cart = require('./cart');
 const express = require('express');
 const router  = express.Router();
@@ -15,9 +14,7 @@ module.exports = (db) => {
     db.query(`SELECT * FROM pizzas;`)
       .then(data => {
         const pizzas = data.rows;
-        const status = orderChecker(cart);
-        const quantity = qtyChecker(cart);
-        const templateVars = { pizzas, status, quantity };
+        const templateVars = { pizzas };
         res.render("home_page", templateVars);
       })
       .catch(err => {
