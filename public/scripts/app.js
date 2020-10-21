@@ -22,6 +22,21 @@ $(document).ready(() => {
     sessionStorage.setItem(CART_KEY, JSON.stringify(window.userCart));
     console.log('Updated cart!');
   }
+  // sets an items quantity to 0
+  window.deleteItem = (itemName) => {
+    /**
+     * {
+        'Pepperoni': 1,
+        'The Terminator': 1,
+        'Meat Lovers': 2
+      };
+     */
+    // update client-side object
+    window.userCart[itemName] = 0;
+    // update session storage to persist cart
+    sessionStorage.setItem(CART_KEY, JSON.stringify(window.userCart));
+    console.log('Updated cart!');
+  }
 
   window.clearCart = () => {
     sessionStorage.setItem(CART_KEY, JSON.stringify({}));
