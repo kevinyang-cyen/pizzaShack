@@ -44,7 +44,7 @@
     </div>
 
     <div>
-      <form method="POST" action="/order">
+      <form method="POST" id="submit-order">
         <div class="form-group">
           <label for="exampleInputPhone">Contact Number </label>
           <input type="phoneNumber" class="form-control" placeholder="Enter Phone Number">
@@ -92,6 +92,25 @@
       console.log('Current cart:', window.userCart);
       updateCartState();
     });
+
+    $('#submit-order').on('submit', (e) => {
+      e.preventDefault();
+      const orderObject = {
+        name: 'John', // use real data
+        contactNumber: '01189998819991197253', // use real data
+        cart: window.userCart
+      };
+
+      console.log('submit order', { orderObject });
+
+      $.ajax('/order', {
+        method: 'POST',
+        data: orderObject
+      });
+
+      // clear cart
+      // window.clearCart
+    })
 
     // onload
     updateCartState();
