@@ -143,9 +143,10 @@
       e.preventDefault();
       const formData = new FormData(e.target);
       //const quantity = formData.get('quantity');
+      const quantity = 0;
       const pizzaName = formData.get('pizzaName');
       console.log({ quantity, pizzaName },"delete item")
-      window.setCart(pizzaName, 0);
+      window.setCart(pizzaName, quantity);
       console.log('Current cart:', window.userCart);
       updateCartState();
     }
