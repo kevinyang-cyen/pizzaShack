@@ -43,6 +43,8 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
 
+    console.log({ body: req.body })
+
     client.messages.create({
       body: 'Hello from Node',
       to: `${toNumber}`,  // Text this number
@@ -53,7 +55,7 @@ module.exports = (db) => {
         // res.redirect("/status");
         console.log(message.sid);
       });
-
+      res.send('ok')
   });
 
 

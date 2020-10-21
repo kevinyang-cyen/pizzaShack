@@ -3,9 +3,9 @@ $(document).ready(() => {
 
   window.getCart = () => {
     const sessionCart = sessionStorage.getItem(CART_KEY);
-    const resolvedCart = sessionCart || "{}";
+    const resolvedCart = sessionCart ? JSON.parse(sessionCart) : {};
     console.log('Session cart set to ', resolvedCart);
-    return JSON.parse(resolvedCart);
+    return resolvedCart;
   }
 
   window.setCart = (itemName, quantity) => {
@@ -24,7 +24,7 @@ $(document).ready(() => {
   }
 
   window.clearCart = () => {
-    sessionStorage.setItem(CART_KEY, JSON.stringify("{}"));
+    sessionStorage.setItem(CART_KEY, JSON.stringify({}));
     window.userCart = {};
     console.log("Cleared cart!");
   }
