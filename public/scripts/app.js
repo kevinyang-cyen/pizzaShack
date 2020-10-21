@@ -1,8 +1,9 @@
 $(document).ready(() => {
   window.getCart = () => {
     const sessionCart = sessionStorage.getItem('cart');
+    const resolvedCart = sessionCart || {};
     console.log('Session cart set to ', sessionCart);
-    return sessionCart || {};
+    return JSON.parse(resolvedCart);
   }
 
   window.setCart = (itemName, quantity) => {
@@ -16,7 +17,7 @@ $(document).ready(() => {
     // update client-side object
     window.userCart[itemName] = quantity;
     // update session storage to persist cart
-    sessionStorage.setItem('cart', userCart);
+    sessionStorage.setItem('cart', JSON.stringify(window.userCart));
     console.log('Updated cart!');
   }
 
