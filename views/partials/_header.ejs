@@ -6,15 +6,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     </div>
-    <% if(status.status === false){ %>
-      <p>Add a pizza to get started</p>
-      <% } else { %> 
       <form class="form-inline" action="/order" method="GET">
         <div class="form-group mb-2">
           <label for="items-in-cart" style="margin-right: 10px"></label>
-          <button type="submit" class="btn btn-outline-dark">View Cart (<%= quantity.qty %>)</button>
+          <button type="submit" id= "cart-button" class="btn btn-outline-dark">View Cart (0)</button>
         </div>
       </form>
-      <% } %>
   </nav>
 </header>
+
+<script>
+function updateCartState() {
+  Object.entries(window.userCart).forEach(([pizzaName, quantity]) => {
+    const slugName = slugify(pizzaName);
+    const quantityLabel = $(`#cart-button`);
+    const quantityInput = $(`#quantity-input-${slugName}`);
+    quantityLabel.text(`View Cart (${count})`);
+    quantityInput.val(quantity);
+  })
+}
+</script>

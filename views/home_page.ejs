@@ -63,8 +63,8 @@
       Object.entries(window.userCart).forEach(([pizzaName, quantity]) => {
         count += parseInt(quantity);
       })
-      console.log("Jillian's count: ", count);
-      return count;
+      const quantityLabel = $(`#cart-button`);
+      quantityLabel.text(`View Cart (${count})`);
     }
 
     function attachFormListeners() {
@@ -91,6 +91,7 @@
 
   attachFormListeners();
   updateCartState();
+  updateHeaderCart()
 
   });
 
