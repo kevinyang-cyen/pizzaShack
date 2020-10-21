@@ -13,22 +13,28 @@
   <div>
     <h3>Your Order</h3>
     <article>
+      <span id="pizza-list" data-pizzas="<%= pizzas.map((p) => p.name).join(',') %>"></span>
       <% for( let pizza of pizzas) { %>
 
       <h2> <%= pizza.name %> </h2>
       <h4>Quantity</h4>
-      <img src=<%=pizza.image_url %>>
+      <img src="<%=pizza.image_url %>">
       <div>
-        <h5>Ingredients:<%= pizza.ingredients%></h5>
-        <h5>Price: $<%= pizza.price %></h5>
-        <h5>Approx time of delivery</h5>
-        <label for="pizzaQuantity">Quantity <%= cart[pizza.name] %> </label>
-        <input type="text" class="form-control" placeholder=" <%= cart[pizza.name] %> ">
+        <form method="POST" id="cart-update-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
+          <h5>Ingredients: <%= pizza.ingredients%></h5>
+          <h5>Price: $<%= pizza.price %></h5>
+          <h5>Approx time of delivery</h5>
+          <label for="pizzaQuantity" id="quantity-<%= pizza.name.replace(' ', '-').toLowerCase() %>">Quantity 0 </label>
+          <input id="quantity-input-<%= pizza.name.replace(' ', '-').toLowerCase() %>" type="text" name="quantity" class="form-control">
 
-
-        <div>
-          <button type="submit" method="POST" type="/modify"class="btn btn-danger">Delete</button>
-        </div>
+          <div>
+            <input type="hidden" name="pizzaName" value="<%= pizza.name %>" />
+            <button type="submit" class="btn btn-primary">Update Quantity</button>
+          </div>
+          <div>
+            <button type="submit" method="POST" action="/delete" class="btn btn-danger">Delete</button>
+          </div>
+        </form>
       </div>
       <% } %>
     </article>
@@ -39,7 +45,7 @@
     </div>
 
     <div>
-      <form method="POST" action="/order">
+      <form method="POST" id="submit-order">
         <div class="form-group">
           <label for="exampleInputPhone">Contact Number </label>
           <input type="phoneNumber" name="customerPhone" class="form-control" placeholder="Enter Phone Number">
@@ -62,5 +68,67 @@
   </div>
 
 </body>
+<script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+<script type="text/javascript" src="/scripts/app.js"></script>
 
+<script>
+  $(document).ready(() => {
+    function slugify(str) {
+      return str.replace(' ', '-').toLowerCase();
+    }
+
+    function updateCartState() {
+      Object.entries(window.userCart).forEach(([pizzaName, quantity]) => {
+        const slugName = slugify(pizzaName);
+        const quantityLabel = $(`#quantity-${slugName}`);
+        const quantityInput = $(`#quantity-input-${slugName}`);
+        quantityLabel.text(`Quantity ${quantity}`);
+        quantityInput.val(quantity);
+      })
+    }
+
+    function attachFormListeners() {
+      const pizzaListSpan = $('#pizza-list');
+      const pizzaList = pizzaListSpan.data('pizzas');
+      pizzaList.split(',').forEach((name) => {
+          const slugName = slugify(name);
+          $(`#cart-update-${slugName}`).on('submit', updateCart);
+      });
+    }
+
+    function updateCart(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const quantity = formData.get('quantity');
+      const pizzaName = formData.get('pizzaName');
+      console.log({ quantity, pizzaName })
+      window.setCart(pizzaName, quantity);
+      console.log('Current cart:', window.userCart);
+      updateCartState();
+    }
+
+    $('#submit-order').on('submit', (e) => {
+      e.preventDefault();
+      const orderObject = {
+        name: 'John', // use real data
+        contactNumber: '01189998819991197253', // use real data
+        cart: window.userCart
+      };
+
+      console.log('submit order', { orderObject });
+
+      $.ajax('/order', {
+        method: 'POST',
+        data: orderObject
+      });
+
+      // clear cart
+      window.clearCart();
+    });
+
+    // onload
+    attachFormListeners();
+    updateCartState();
+  });
+</script>
 </html>

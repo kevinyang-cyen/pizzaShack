@@ -57,17 +57,25 @@ module.exports = (db) => {
       });
 
 
+    console.log({ body: req.body })
+
     client.messages.create({
       body: 'Hello from Node',
       to: `${toNumber}`,  // Text this number
       from: '+16502414473' // From a valid Twilio number
     })
       .then((message) => {
+<<<<<<< HEAD
         // console.log("text sent");
         res.redirect("/status");
         // console.log(message.sid);
+=======
+        console.log("text sent");
+        // res.redirect("/status");
+        console.log(message.sid);
+>>>>>>> c49893eeb10e29072357bde4f2689e81bde12a52
       });
-
+      res.send('ok')
   });
 
 

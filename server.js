@@ -44,7 +44,7 @@ const cartRoutes = require('./routes/cartRoutes.js');
 app.use("/", ordersRoutes(db));
 app.use("/order",getCart(db));
 app.use("/status",statusRoutes(db));
-app.use("/modify", cartRoutes(db));
+app.use("/modify/:id", cartRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 app.listen(PORT, () => {
