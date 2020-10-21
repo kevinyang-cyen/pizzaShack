@@ -25,15 +25,16 @@
           <h5>Price: $<%= pizza.price %></h5>
           <h5>Approx time of delivery</h5>
           <label for="pizzaQuantity" id="quantity-<%= pizza.name.replace(' ', '-').toLowerCase() %>">Quantity 0 </label>
-          <input id="quantity-input-<%= pizza.name.replace(' ', '-').toLowerCase() %>" type="text" name="quantity" class="form-control">
+          <input id="quantity-input-<%= pizza.name.replace(' ', '-').toLowerCase() %>" type="text" name="quantity"
+            class="form-control">
 
           <div>
             <input type="hidden" name="pizzaName" value="<%= pizza.name %>" />
             <button type="submit" class="btn btn-primary">Update Quantity</button>
           </div>
-          <div>
-            <button type="submit" method="POST" action="/delete" class="btn btn-danger">Delete</button>
-          </div>
+        </form>
+        <form method="POST" id="cart-delete-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
+          <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </div>
       <% } %>
@@ -54,7 +55,7 @@
             else.... We promise</small>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1" >Name</label>
+          <label for="exampleInputPassword1">Name</label>
           <input type="text" name="customerName" class="form-control" placeholder="First Name and Last Inital">
         </div>
 
@@ -91,8 +92,8 @@
       const pizzaListSpan = $('#pizza-list');
       const pizzaList = pizzaListSpan.data('pizzas');
       pizzaList.split(',').forEach((name) => {
-          const slugName = slugify(name);
-          $(`#cart-update-${slugName}`).on('submit', updateCart);
+        const slugName = slugify(name);
+        $(`#cart-update-${slugName}`).on('submit', updateCart);
       });
     }
 
@@ -131,4 +132,5 @@
     updateCartState();
   });
 </script>
+
 </html>
