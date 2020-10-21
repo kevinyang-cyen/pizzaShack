@@ -35,7 +35,7 @@ $(document).ready(() => {
     window.userCart[itemName] = 0;
     // update session storage to persist cart
     sessionStorage.setItem(CART_KEY, JSON.stringify(window.userCart));
-    console.log('Updated cart!');
+    console.log('Updated cart! Deleted Item!');
   }
 
   window.clearCart = () => {

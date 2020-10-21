@@ -144,7 +144,7 @@
       const formData = new FormData(e.target);
       //const quantity = formData.get('quantity');
       const pizzaName = formData.get('pizzaName');
-      //console.log({ quantity, pizzaName })
+      console.log({ quantity, pizzaName },"delete item")
       window.setCart(pizzaName, 0);
       console.log('Current cart:', window.userCart);
       updateCartState();
@@ -152,6 +152,7 @@
 
     // onload
     attachFormListeners();
+    attachFormListenersDelete();
     updateCartState();
   });
 </script>
