@@ -42,7 +42,7 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-
+    console.log(res);
     client.messages.create({
       body: 'Hello from Node',
       to: `${toNumber}`,  // Text this number
