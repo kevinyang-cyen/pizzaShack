@@ -8,14 +8,31 @@
 const express = require('express');
 const router  = express.Router();
 const cart = require("./cart.js");
+const cartHelper = require("../helperFunctions/cartHelper.js")
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
-    console.log(res.body)
     console.log(req.params)
-    console.log('almost there bro')
-    templateVars = {cart}
-    res.render("order_page_template", templateVars)
+    cart[id]= req.params.quantity;
+    // re renders page after cart item updated
+    let pizzaInCart = cartHelper(cart);
+
+
+    console.log(pizzaInCart, 'PIZZA in CART');
+    const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`
+    console.log(query, "query");
+    db.query(query)
+      .then(data => {
+        const pizzas = data.rows;
+        const templateVars = { pizzas, cart };
+        console.log(templateVars, 'template vars');
+        res.render("order_page_template", templateVars);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
 
 
