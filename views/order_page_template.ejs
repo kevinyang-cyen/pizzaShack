@@ -67,16 +67,18 @@
   </div>
 
 </body>
+<script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+<script type="text/javascript" src="/scripts/app.js"></script>
+
 <script>
 
   $(document).ready(() => {
     $('#cart-update').on('submit', (e) => {
+      e.preventDefault();
       console.log({ e });
     });
   })
 
 </script>
 
-<script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-<script type="text/javascript" src="/scripts/app.js"></script>
 </html>
