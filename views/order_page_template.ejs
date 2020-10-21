@@ -55,7 +55,30 @@
   $(document).ready(() => {
     function buildCart() {
       const cart = window.userCart;
-      Object.en
+      Object.entries(cart).forEach(([pizzaName, quantity]) => {
+        $('article').append(`
+        <h2>${pizza.name %> </h2>
+      <h4>Quantity</h4>
+      <img src${izza.image_url %>>
+      <div>
+        <form method="POST" id="cart-update">
+          <h5>Ingredients${pizza.ingredients%></h5>
+          <h5>Price: ${pizza.price %></h5>
+          <h5>Approx time of delivery</h5>
+          <label for="pizzaQuantity">Quantity${userCart[pizza.name] %> </label>
+          <input type="text" name="quantity" class="form-control" placeholder="${userCart[pizza.name] %> ">
+
+          <div>
+            <input type="hidden" name="pizzaName" value=${pizza.name %>" />
+            <button type="submit" class="btn btn-primary">Update Quantity</button>
+          </div>
+        </form>
+        <div>
+          <button type="submit" method="POST" action="/delete" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+        `)
+      })
     }
 
     $('#cart-update').on('submit', (e) => {
