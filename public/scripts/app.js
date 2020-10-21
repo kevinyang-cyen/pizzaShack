@@ -1,8 +1,8 @@
 $(document).ready(() => {
   window.getCart = () => {
     const sessionCart = sessionStorage.getItem('cart');
-    const resolvedCart = sessionCart || {};
-    console.log('Session cart set to ', sessionCart);
+    const resolvedCart = sessionCart || "{}";
+    console.log('Session cart set to ', resolvedCart);
     return JSON.parse(resolvedCart);
   }
 
