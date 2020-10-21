@@ -24,14 +24,14 @@ module.exports = (db) => {
     let pizzaInCart = cartHelper(cart);
 
 
-    console.log(pizzaInCart, 'PIZZA in CART');
+    // console.log(pizzaInCart, 'PIZZA in CART');
     const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`
-    console.log(query, "query");
+    // console.log(query, "query");
     db.query(query)
       .then(data => {
         const pizzas = data.rows;
         const templateVars = { pizzas, cart };
-        console.log(templateVars, 'template vars');
+        // console.log(templateVars, 'template vars');
         res.render("order_page_template", templateVars);
       })
       .catch(err => {
@@ -42,6 +42,20 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
+    const phone = req.body.customerPhone;
+    const name = req.body.customerName;
+    const query = `INSERT INTO orders (name, phone_number) VALUES ($1, $2) RETURNING *;`
+
+    db.query(query, [name, phone])
+      .then(data => {
+        res.send("database entry successful");
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+
 
     client.messages.create({
       body: 'Hello from Node',
@@ -49,9 +63,9 @@ module.exports = (db) => {
       from: '+16502414473' // From a valid Twilio number
     })
       .then((message) => {
-        console.log("text sent");
+        // console.log("text sent");
         res.redirect("/status");
-        console.log(message.sid);
+        // console.log(message.sid);
       });
 
   });
