@@ -34,6 +34,7 @@
           </div>
         </form>
         <form method="POST" id="cart-delete-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
+          <input type="hidden" style="display: none" name="pizzaName" value="<%= pizza.name %>" />
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </div>
@@ -110,6 +111,7 @@
     function updateCart(e) {
       e.preventDefault();
       const formData = new FormData(e.target);
+      console.log(formData, "formData in update cart")
       const quantity = formData.get('quantity');
       const pizzaName = formData.get('pizzaName');
       console.log({ quantity, pizzaName })
@@ -141,12 +143,14 @@
     // nick current
     function deleteItem(e){
       e.preventDefault();
+      console.log(e, "event")
       const formData = new FormData(e.target);
+      console.log(formData, "form data")
       //const quantity = formData.get('quantity');
-      const quantity = 0;
+      //const quantity = 0;
       const pizzaName = formData.get('pizzaName');
-      console.log({ quantity, pizzaName },"delete item")
-      window.setCart(pizzaName, quantity);
+      console.log({ pizzaName },"delete item")
+      window.deleteItem(pizzaName);
       console.log('Current cart:', window.userCart);
       updateCartState();
     }

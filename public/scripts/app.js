@@ -24,6 +24,7 @@ $(document).ready(() => {
   }
   // sets an items quantity to 0
   window.deleteItem = (itemName) => {
+    console.log(itemName)
     /**
      * {
         'Pepperoni': 1,
@@ -32,7 +33,10 @@ $(document).ready(() => {
       };
      */
     // update client-side object
-    window.userCart[itemName] = 0;
+
+     window.userCart[itemName] = 0;
+     //to remove enitre thing
+     //sessionsStoryage.removeItem(userCart[itemName]) item to remove entirely
     // update session storage to persist cart
     sessionStorage.setItem(CART_KEY, JSON.stringify(window.userCart));
     console.log('Updated cart! Deleted Item!');
