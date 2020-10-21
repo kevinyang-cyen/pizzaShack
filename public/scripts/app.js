@@ -1,6 +1,8 @@
 $(document).ready(() => {
+  const CART_KEY = 'pizzaCart';
+
   window.getCart = () => {
-    const sessionCart = sessionStorage.getItem('cart');
+    const sessionCart = sessionStorage.getItem(CART_KEY);
     const resolvedCart = sessionCart || "{}";
     console.log('Session cart set to ', resolvedCart);
     return JSON.parse(resolvedCart);
@@ -17,8 +19,14 @@ $(document).ready(() => {
     // update client-side object
     window.userCart[itemName] = quantity;
     // update session storage to persist cart
-    sessionStorage.setItem('cart', JSON.stringify(window.userCart));
+    sessionStorage.setItem(CART_KEY, JSON.stringify(window.userCart));
     console.log('Updated cart!');
+  }
+
+  window.clearCart = () => {
+    sessionStorage.setItem(CART_KEY, JSON.stringify("{}"));
+    window.userCart = {};
+    console.log("Cleared cart!");
   }
 
   window.userCart = getCart();
