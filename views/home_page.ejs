@@ -41,7 +41,7 @@
 
 <script>
   $(document).ready(() => {
-    $('#cart-update').on('submit', (e) => {
+    $('#cart-add').on('submit', (e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
       const quantity = formData.get('quantity');
