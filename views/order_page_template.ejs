@@ -49,14 +49,14 @@
       <form method="POST" id="submit-order">
         <div class="form-group">
           <label for="exampleInputPhone">Contact Number </label>
-          <input type="phoneNumber" name="customerPhone" class="form-control" placeholder="Enter Phone Number">
+          <input id="phoneNumber" type="phoneNumber" name="customerPhone" class="form-control" placeholder="Enter Phone Number">
           <small id="privacy message" class="form-text text-muted">
             We'll never share your phone number with anyone
             else.... We promise</small>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Name</label>
-          <input type="text" name="customerName" class="form-control" placeholder="First Name and Last Inital">
+          <label for="exampleInputPassword1" >Name</label>
+          <input id="customerName" type="text" name="customerName" class="form-control" placeholder="First Name and Last Inital">
         </div>
 
         <button type="submit" class="btn btn-info">Place Order</button>
@@ -120,9 +120,10 @@
 
     $('#submit-order').on('submit', (e) => {
       e.preventDefault();
+
       const orderObject = {
-        name: 'John', // use real data
-        contactNumber: '01189998819991197253', // use real data
+        name: document.getElementById('customerName').value, // use real data
+        contactNumber: document.getElementById('phoneNumber').value, // use real data
         cart: window.userCart
       };
 
