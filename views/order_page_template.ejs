@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Your Cart</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -25,15 +25,17 @@
           <h5>Price: $<%= pizza.price %></h5>
           <h5>Approx time of delivery</h5>
           <label for="pizzaQuantity" id="quantity-<%= pizza.name.replace(' ', '-').toLowerCase() %>">Quantity 0 </label>
-          <input id="quantity-input-<%= pizza.name.replace(' ', '-').toLowerCase() %>" type="text" name="quantity" class="form-control">
+          <input id="quantity-input-<%= pizza.name.replace(' ', '-').toLowerCase() %>" type="text" name="quantity"
+            class="form-control">
 
           <div>
             <input type="hidden" name="pizzaName" value="<%= pizza.name %>" />
             <button type="submit" class="btn btn-primary">Update Quantity</button>
           </div>
-          <div>
-            <button type="submit" method="POST" action="/delete" class="btn btn-danger">Delete</button>
-          </div>
+        </form>
+        <form method="POST" id="cart-delete-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
+          <input type="hidden" style="display: none" name="pizzaName" value="<%= pizza.name %>" />
+          <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </div>
       <% } %>
@@ -91,14 +93,25 @@
       const pizzaListSpan = $('#pizza-list');
       const pizzaList = pizzaListSpan.data('pizzas');
       pizzaList.split(',').forEach((name) => {
-          const slugName = slugify(name);
-          $(`#cart-update-${slugName}`).on('submit', updateCart);
+        const slugName = slugify(name);
+        $(`#cart-update-${slugName}`).on('submit', updateCart);
       });
     }
+    //nick
+    function attachFormListenersDelete() {
+      const pizzaListSpan = $('#pizza-list');
+      const pizzaList = pizzaListSpan.data('pizzas');
+      pizzaList.split(',').forEach((name) => {
+        const slugName = slugify(name);
+        $(`#cart-delete-${slugName}`).on('submit', deleteItem);
+      });
+    }
+
 
     function updateCart(e) {
       e.preventDefault();
       const formData = new FormData(e.target);
+      console.log(formData, "formData in update cart")
       const quantity = formData.get('quantity');
       const pizzaName = formData.get('pizzaName');
       console.log({ quantity, pizzaName })
@@ -127,9 +140,26 @@
       window.clearCart();
     });
 
+    // nick current
+    function deleteItem(e){
+      e.preventDefault();
+      console.log(e, "event")
+      const formData = new FormData(e.target);
+      console.log(formData, "form data")
+      //const quantity = formData.get('quantity');
+      //const quantity = 0;
+      const pizzaName = formData.get('pizzaName');
+      console.log({ pizzaName },"delete item")
+      window.deleteItem(pizzaName);
+      console.log('Current cart:', window.userCart);
+      updateCartState();
+    }
+
     // onload
     attachFormListeners();
+    attachFormListenersDelete();
     updateCartState();
   });
 </script>
+
 </html>
