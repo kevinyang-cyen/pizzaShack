@@ -42,13 +42,25 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    const phone = req.body.customerPhone;
-    const name = req.body.customerName;
-    const query = `INSERT INTO orders (name, phone_number) VALUES ($1, $2) RETURNING *;`
+    const name = req.body.name;
+    const phone = req.body.contactNumber;
+    const orderQuery = `INSERT INTO orders (name, phone_number) VALUES ($1, $2) RETURNING *;`;
+    const ordersStatusQuery = 'INSERT INTO pizzas_orders (pizza_id, order_id, quantity) VALUES ($1, $2, $3);';
+    const findPizzaQuery = 'SELECT id FROM pizzas WHERE name = $1;';
+    let orderMessage = 'New Order!\n';
+    for (const item in req.body.cart) {
+      orderMessage += `${req.body.cart[item]} x ${item}\n`
+    }
 
-    db.query(query, [name, phone])
+    db.query(orderQuery, [name, phone])
       .then(data => {
-        res.send("database entry successful");
+        for (const item in req.body.cart) {
+          db.query(findPizzaQuery, [item])
+          .then(idData => {
+            db.query(ordersStatusQuery, [idData.rows[0].id, data.rows[0].id, req.body.cart[item]])
+            .then(insertData => res.json(insertData));
+          })
+        }
       })
       .catch(err => {
         res
@@ -56,11 +68,8 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
 
-
-    console.log({ body: req.body })
-
     client.messages.create({
-      body: 'Hello from Node',
+      body: orderMessage,
       to: `${toNumber}`,  // Text this number
       from: '+16502414473' // From a valid Twilio number
     })
