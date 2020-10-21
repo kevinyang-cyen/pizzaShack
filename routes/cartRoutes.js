@@ -17,5 +17,7 @@ module.exports = (db) => {
     templateVars = {cart}
     res.render("order_page_template", templateVars)
   });
+
+
   return router;
 };
