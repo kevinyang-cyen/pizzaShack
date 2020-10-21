@@ -77,7 +77,8 @@
       const formData = new FormData(e.target);
       const quantity = formData.get('quantity');
       const pizzaName = formData.get('pizzaName');
-      console.log({ quantity, pizzaName });
+      window.setCart(pizzaName, quantity);
+      console.log('Current cart:', window.userCart);
     });
   });
 </script>
