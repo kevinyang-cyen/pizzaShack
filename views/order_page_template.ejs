@@ -76,7 +76,6 @@
         Object.entries(window.userCart).forEach(([pizzaName, quantity]) => {
           const quantityLabel = $(`#quantity-${pizzaName}`);
           const quantityInput = $(`#quantity-input-${pizzaName}`);
-          console.log({ pizzaName, quantity, quantityLabel, quantityInput })
           quantityLabel.text(`Quantity ${quantity}`);
           quantityInput.val(quantity);
         })
