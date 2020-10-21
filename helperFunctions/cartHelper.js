@@ -10,14 +10,10 @@ const cartHelper = (cart) => {
 
   for (key of keys) {
     if (cart[key] > 0) {
-
-
-
       pizzaInCart.push(key);
     }
   };
   let sanitizedPizza = pizzaInCart.map(function (pizza) {
-
     return "'" + pizza + "'";
   }).join(",");
   return sanitizedPizza
