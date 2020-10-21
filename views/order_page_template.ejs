@@ -7,36 +7,39 @@
   <title>Your Cart</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/order_page.css">
 </head>
 
 <body>
   <div>
     <h3>Your Order</h3>
-    <article>
+    <article class="cart-items">
       <span id="pizza-list" data-pizzas="<%= pizzas.map((p) => p.name).join(',') %>"></span>
       <% for( let pizza of pizzas) { %>
+      <div class="one-pizza">
+        <h2> <%= pizza.name %> </h2>
+        <h4>Quantity</h4>
+        <img src="<%=pizza.image_url %>">
+        <div>
+          <form method="POST" id="cart-update-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
+            <h5>Ingredients: <%= pizza.ingredients%></h5>
+            <h5>Price: $<%= pizza.price %></h5>
+            <h5>Approx time of delivery</h5>
+            <label for="pizzaQuantity" id="quantity-<%= pizza.name.replace(' ', '-').toLowerCase() %>">Quantity 0
+            </label>
+            <input id="quantity-input-<%= pizza.name.replace(' ', '-').toLowerCase() %>" type="text" name="quantity"
+              class="form-control">
 
-      <h2> <%= pizza.name %> </h2>
-      <h4>Quantity</h4>
-      <img src="<%=pizza.image_url %>">
-      <div>
-        <form method="POST" id="cart-update-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
-          <h5>Ingredients: <%= pizza.ingredients%></h5>
-          <h5>Price: $<%= pizza.price %></h5>
-          <h5>Approx time of delivery</h5>
-          <label for="pizzaQuantity" id="quantity-<%= pizza.name.replace(' ', '-').toLowerCase() %>">Quantity 0 </label>
-          <input id="quantity-input-<%= pizza.name.replace(' ', '-').toLowerCase() %>" type="text" name="quantity"
-            class="form-control">
-
-          <div>
-            <input type="hidden" name="pizzaName" value="<%= pizza.name %>" />
-            <button type="submit" class="btn btn-primary">Update Quantity</button>
-          </div>
-        </form>
-        <form method="POST" id="cart-delete-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
-          <input type="hidden" style="display: none" name="pizzaName" value="<%= pizza.name %>" />
-          <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
+            <div>
+              <input type="hidden" name="pizzaName" value="<%= pizza.name %>" />
+              <button type="submit" class="btn btn-primary">Update Quantity</button>
+            </div>
+          </form>
+          <form method="POST" id="cart-delete-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
+            <input type="hidden" style="display: none" name="pizzaName" value="<%= pizza.name %>" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
       </div>
       <% } %>
     </article>
@@ -50,14 +53,16 @@
       <form method="POST" id="submit-order">
         <div class="form-group">
           <label for="exampleInputPhone">Contact Number </label>
-          <input id="phoneNumber" type="phoneNumber" name="customerPhone" class="form-control" placeholder="Enter Phone Number">
+          <input id="phoneNumber" type="phoneNumber" name="customerPhone" class="form-control"
+            placeholder="Enter Phone Number">
           <small id="privacy message" class="form-text text-muted">
             We'll never share your phone number with anyone
             else.... We promise</small>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1" >Name</label>
-          <input id="customerName" type="text" name="customerName" class="form-control" placeholder="First Name and Last Inital">
+          <label for="exampleInputPassword1">Name</label>
+          <input id="customerName" type="text" name="customerName" class="form-control"
+            placeholder="First Name and Last Inital">
         </div>
 
         <button type="submit" class="btn btn-info">Place Order</button>
@@ -141,7 +146,7 @@
     });
 
     // nick current
-    function deleteItem(e){
+    function deleteItem(e) {
       e.preventDefault();
       console.log(e, "event")
       const formData = new FormData(e.target);
@@ -149,7 +154,7 @@
       //const quantity = formData.get('quantity');
       //const quantity = 0;
       const pizzaName = formData.get('pizzaName');
-      console.log({ pizzaName },"delete item")
+      console.log({ pizzaName }, "delete item")
       window.deleteItem(pizzaName);
       console.log('Current cart:', window.userCart);
       updateCartState();
