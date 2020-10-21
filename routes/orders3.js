@@ -50,7 +50,7 @@ module.exports = (db) => {
     })
       .then((message) => {
         console.log("text sent");
-        res.redirect("/status");
+        // res.redirect("/status");
         console.log(message.sid);
       });
 
