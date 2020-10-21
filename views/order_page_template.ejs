@@ -71,14 +71,14 @@
 <script type="text/javascript" src="/scripts/app.js"></script>
 
 <script>
-
   $(document).ready(() => {
     $('#cart-update').on('submit', (e) => {
       e.preventDefault();
-      console.log({ e });
+      const formData = new FormData(e.target);
+      const quantity = formData.get('quantity');
+      const pizzaName = formData.get('pizzaName');
+      console.log({ quantity, pizzaName });
     });
-  })
-
+  });
 </script>
-
 </html>
