@@ -1,10 +1,10 @@
 $(document).ready(() => {
-  function getCart() {
+  window.getCart = () => {
     const sessionCart = sessionStorage.getItem('cart');
     return sessionCart || {};
   }
 
-  function setCart(itemName, quantity) {
+  window.setCart = (itemName, quantity) => {
     /**
      * {
         'Pepperoni': 1,
@@ -16,6 +16,7 @@ $(document).ready(() => {
     window.userCart[itemName] = quantity;
     // update session storage to persist cart
     sessionStorage.setItem('cart', userCart);
+    console.log('Updated cart!');
   }
 
   window.userCart = getCart();
