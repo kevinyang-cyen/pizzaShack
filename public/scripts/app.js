@@ -1,6 +1,7 @@
 $(document).ready(() => {
   window.getCart = () => {
     const sessionCart = sessionStorage.getItem('cart');
+    console.log('Session cart set to ', sessionCart);
     return sessionCart || {};
   }
 
