@@ -1,0 +1,30 @@
+header {
+  display: flex;
+  padding: 20px;
+  background-color: #EEBA0B;
+  
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Knewave', cursive;
+    width: 100%;
+    align-items: center;
+    
+    .logo {
+      color: #710000;
+      font-family: 'Knewave', cursive;
+      font-size: 35px;
+      text-decoration:none;
+    }
+
+    #cart-button {
+      background-color: #710000;
+      color: #EEBA0B;
+      border-radius: 25px;
+      padding: 9px;
+      
+    }
+
+  }
+}
