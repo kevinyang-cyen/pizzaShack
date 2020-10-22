@@ -88,7 +88,7 @@ module.exports = (db) => {
   let minutes = 0;
   router.get('/:id', (req, res) => {
     db.query(`
-    SELECT orders.id, pizzas.name as name, price, image_url, orders.order_status, pizzas_orders.quantity
+    SELECT orders.id, pizzas.name as name, pizzas.ingredients as ingredients, price, image_url, orders.order_status, pizzas_orders.quantity
     FROM pizzas
     JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
     JOIN orders ON pizzas_orders.order_id = orders.id
