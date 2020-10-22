@@ -33,8 +33,8 @@ module.exports = (db) => {
     // const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`;
     // // console.log(query, "query");
 
-    // everything above here we are 86ing for now
-
+    // ^^^everything above here we are 86ing for now
+    // sends all pizzas to the page only displays those with a quantity
     const query = 'SELECT * from pizzas';
 
 
