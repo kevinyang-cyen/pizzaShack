@@ -3,7 +3,7 @@
 // filter pizzas so it only shows ^ items
 
 // send that data only to the template
-
+//obsolete with no hard coded object
 const cartHelper = (cart) => {
   let keys = Object.keys(cart);
   let pizzaInCart = [];
