@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const cart = require("./cart.js");
-const cartHelper = require("../helperFunctions/cartHelper.js")
+const cartHelper = require("../helperFunctions/cartHelper.js");
 
 //twilio
 let accountSid = process.env.TWILIO_SID; // Your Account SID from www.twilio.com/console
@@ -25,7 +25,7 @@ module.exports = (db) => {
 
 
     // console.log(pizzaInCart, 'PIZZA in CART');
-    const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`
+    const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`;
     // console.log(query, "query");
     db.query(query)
       .then(data => {
@@ -45,45 +45,134 @@ module.exports = (db) => {
     const name = req.body.name;
     const phone = req.body.contactNumber;
     const orderQuery = `INSERT INTO orders (name, phone_number) VALUES ($1, $2) RETURNING *;`;
-    const ordersStatusQuery = 'INSERT INTO pizzas_orders (pizza_id, order_id, quantity) VALUES ($1, $2, $3);';
+    const ordersStatusQuery = 'INSERT INTO pizzas_orders (pizza_id, order_id, quantity) VALUES ($1, $2, $3) RETURNING *;';
     const findPizzaQuery = 'SELECT id FROM pizzas WHERE name = $1;';
     let orderMessage = 'New Order!\n';
     for (const item in req.body.cart) {
-      orderMessage += `${req.body.cart[item]} x ${item}\n`
+      orderMessage += `${req.body.cart[item]} x ${item}\n`;
     }
 
     db.query(orderQuery, [name, phone])
       .then(data => {
+        orderMessage += `Order ID: ${data.rows[0].id}`;
         for (const item in req.body.cart) {
           db.query(findPizzaQuery, [item])
-          .then(idData => {
-            db.query(ordersStatusQuery, [idData.rows[0].id, data.rows[0].id, req.body.cart[item]])
-            .then(insertData => res.json(insertData));
-          })
+            .then(idData => {
+              db.query(ordersStatusQuery, [idData.rows[0].id, data.rows[0].id, req.body.cart[item]]);
+            })
+            .catch(err => console.log(err));
         }
+        return data.rows[0].id;
+      })
+      .then(order => {
+        res.json({order});
+        // res.redirect(`/order/${order}`);
+      })
+      .catch(err => {
+        console.log(err);
+        res
+          .status(500)
+          .json({ error: err.message });
+      })
+
+      .then(res => {
+        client.messages.create({
+          body: orderMessage,
+          to: `${toNumber}`,  // Text this number
+          from: '+16502414473' // From a valid Twilio number
+        });
+      });
+
+  });
+
+  let minutes = 0;
+  router.get('/:id', (req, res) => {
+    db.query(`
+    SELECT orders.id, pizzas.name as name, price, image_url, orders.order_status, pizzas_orders.quantity
+    FROM pizzas
+    JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
+    JOIN orders ON pizzas_orders.order_id = orders.id
+    WHERE orders.id = $1;
+    `, [req.params.id])
+      .then(data => {
+        const orderLists = data.rows;
+        const templateVars = {orderLists, minutes};
+        console.log(templateVars);
+        res.render("order_status", templateVars);
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
-
-    client.messages.create({
-      body: orderMessage,
-      to: `${toNumber}`,  // Text this number
-      from: '+16502414473' // From a valid Twilio number
-    })
-      .then((message) => {
-          // console.log("text sent");
-          res.redirect("/status");
-          // console.log(message.sid);
-        console.log("text sent");
-        // res.redirect("/status");
-        console.log(message.sid);
-      });
-      res.send('ok')
   });
 
+  router.post('/:id', (req, res) => {
+    let body = req.body.Body.split(' ');
+    minutes = parseInt(body[1]);
+    let order_id = parseInt(body[0]);
+    let phoneNumber = '+16502414473'; // PHONE NUMBER OF CUSTOMER HERE
+
+    if (!minutes) {
+      minutes = 'Sorry your order was declined!';
+      db.query(`
+        UPDATE orders
+        SET order_status = 'Declined'
+        FROM (SELECT orders.id, pizzas.name as name, price, image_url, orders.order_status, pizzas_orders.quantity
+          FROM pizzas
+          JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
+          JOIN orders ON pizzas_orders.order_id = orders.id) as subquery
+          WHERE orders.id = $1;
+        `, [order_id])
+        .then(data => {
+          res.json(data);
+        })
+        .catch(e => res.json({error: e.message }));
+    } else if (minutes) {
+      db.query(`
+        UPDATE orders
+        SET order_status = 'Accepted'
+        FROM (SELECT orders.id, pizzas.name as name, price, image_url, orders.order_status, pizzas_orders.quantity
+          FROM pizzas
+          JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
+          JOIN orders ON pizzas_orders.order_id = orders.id) as subquery
+          WHERE orders.id = $1;
+        `, [order_id])
+        .then(data => {
+          res.json(data);
+        })
+        .catch(e => res.json({error: e.message }));
+
+      setTimeout(function() {
+        client.messages.create({
+          body: 'Your Order is Ready!',
+          to: `${toNumber}`,  // REPLACE WITH phoneNumber AFTER
+          from: '+16502414473' // From a valid Twilio number
+        })
+          .then((message) => {
+            console.log("text sent");
+            console.log(message.sid);
+          });
+
+        db.query(`
+          UPDATE orders
+          SET order_status = 'Completed'
+          FROM (SELECT orders.id, pizzas.name as name, price, image_url, orders.order_status, pizzas_orders.quantity
+            FROM pizzas
+            JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
+            JOIN orders ON pizzas_orders.order_id = orders.id) as subquery
+          WHERE orders.id = $1;
+          `, [order_id])
+          .then(data => {
+            res.json(data);
+          })
+          .catch(e => res.json({error: e.message }));
+
+        minutes = 0;
+      }, minutes * 60 * 1000);
+
+    }
+  });
 
   return router;
 };
