@@ -9,6 +9,7 @@ $(document).ready(function () {
       const entirePizza = $(`#pizza-${slugName}`);
       const quantityLabel = $(`#quantity-${slugName}`);
       const quantityInput = $(`#quantity-input-${slugName}`);
+      //added this so only pizzas with quantity appear
       if (quantity > 0 ){
         entirePizza.removeClass('zero-pizza')
       } else{
