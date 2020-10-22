@@ -9,7 +9,7 @@ $(document).ready(function () {
       const entirePizza = $(`#pizza-${slugName}`);
       const quantityLabel = $(`#quantity-${slugName}`);
       const quantityInput = $(`#quantity-input-${slugName}`);
-      if (quantity){
+      if (quantity > 0 ){
         entirePizza.removeClass('zero-pizza')
       } else{
         entirePizza.addClass('zero-pizza')

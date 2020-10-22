@@ -18,4 +18,8 @@ div.one-pizza {
   justify-content: space-around;
 }
 
+div.zero-pizza{
+  display: none;
+}
+
 /*# sourceMappingURL=order_page.css.map */
