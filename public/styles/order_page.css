@@ -1,0 +1,23 @@
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+  display: flexbox;
+  flex-direction: column;
+  background-color: pink;
+}
+
+article.cart-items {
+  background-color: red;
+  display: flexbox;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 300;
+}
+
+class.one-pizza {
+  display: flexbox;
+  justify-content: center;
+  background-color: teal;
+}
+
+/*# sourceMappingURL=order_page.css.map */
