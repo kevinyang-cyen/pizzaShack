@@ -6,8 +6,14 @@ $(document).ready(function () {
   function updateCartState() {
     Object.entries(window.userCart).forEach(([pizzaName, quantity]) => {
       const slugName = slugify(pizzaName);
+      const entirePizza = $(`#pizza-${slugName}`);
       const quantityLabel = $(`#quantity-${slugName}`);
       const quantityInput = $(`#quantity-input-${slugName}`);
+      if (quantity){
+        entirePizza.removeClass('zero-pizza')
+      } else{
+        entirePizza.addClass('zero-pizza')
+      }
       quantityLabel.text(`Quantity ${quantity}`);
       quantityInput.val(quantity);
     })
