@@ -11,11 +11,13 @@
   <link rel="stylesheet" href="/styles/order_page.css">
   <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Knewave&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Knewave&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet">
 
   <title>Pizza Shack</title>
 </head>
+
 <body>
   <%- include('partials/_header') %>
   <div>
@@ -147,9 +149,9 @@
         method: 'POST',
         data: orderObject
       })
-      .then(res => {
-          window.location.href=`/order/${res.order}`;
-      });
+        .then(res => {
+          window.location.href = `/order/${res.order}`;
+        });
 
       // clear cart
       window.clearCart();
