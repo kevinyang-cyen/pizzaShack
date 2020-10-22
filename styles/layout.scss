@@ -1,9 +1,19 @@
 // See: https://sass-lang.com/
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
 body {
-  background-color: #EEE;
+  background-color: #f8f8ff;
+  border-color: #813531;
+  font-family: 'Roboto', sans-serif;
 
-  h1 {
-    color: #244751;
-  }
+    button {
+      background-color: transparent;
+      border: none;
+    }
 }
+
