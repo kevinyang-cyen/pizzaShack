@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/homepage.css" type="text/css" />
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Knewave&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
@@ -17,27 +18,29 @@
     <%- include('partials/_header') %>
     <main style="margin: 1em;">
       <h3>Our Menu</h3>
+      <div class= "pizza-item-container"> 
       <span id="pizza-list" data-pizzas="<%= pizzas.map((p) => p.name).join(',') %>"></span>
-      <% for(let pizza of pizzas) { %>
-      <div class = pizza-item-container>
-        <img src="<%= pizza.image_url%>" alt="pizza">
-        <div class="title-desc">
-          <h4><%= pizza.name %></h4>
-          <p><%= pizza.ingredients %></p>
-        </div>
-        <div class="price-addtocart">
-          <p>$<%= pizza.price %></p>
-          <form method="POST" id="cart-update-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
-            <div>
-              <label for="quantity">Quantity:</label>
-              <input type="hidden" name="pizzaName" value="<%= pizza.name %>" />
-              <input type="number" class="form-control" name="quantity" placeholder="Max 10" min="1" max="10">
-            </div>
-            <button type="submit" class="btn btn-outline-danger">Add To Cart</button>
-          </form>
-        </div>
-     <% } %>
-      </div>
+                    <% for(let pizza of pizzas) { %>
+                    <div class="pizza-item">
+                                    <img src="<%= pizza.image_url%>" alt="pizza">
+                                    <div class="title-desc">
+                                      <h4><%= pizza.name %></h4>
+                                      <p><%= pizza.ingredients %></p>
+                                    </div>
+                                    <div class="price-addtocart">
+                                      <p>$<%= pizza.price %></p>
+                                                    <form method="POST" id="cart-update-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
+
+                                                        <label for="quantity">Quantity:</label>
+                                                        <input type="hidden" name="pizzaName" value="<%= pizza.name %>" />
+                                                        <input type="number" class="form-control" name="quantity" placeholder="Max 10" min="1" max="10" />
+
+                                                      <button type="submit" class="btn btn-success">Add To Cart</button>
+                                                    </form>
+                                    </div>
+                    </div>
+                  <% } %>
+    </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
