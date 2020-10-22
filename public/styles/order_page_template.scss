@@ -9,7 +9,7 @@ body {
   // background-color: pink;
 }
 article.cart-items{
-  // background-color: red;
+  background-color: red;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,6 +17,7 @@ article.cart-items{
 }
 div.one-pizza{
   display: flex;
-  justify-content: center;
-  background-color: teal;
+  flex-direction: column;
+
+  justify-content: space-around;
 }
