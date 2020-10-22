@@ -1,11 +1,36 @@
-div {
+body {
+  font-family: Montserrat, sans-serif;
+}
+body main {
+  margin-left: 1em;
+}
+body article {
+  color: black;
+}
+body article h1 {
+  margin: auto;
+  margin-left: 15%;
+  margin-top: 10px;
+}
+
+.order-items {
+  border: 5px solid #EEBA0B;
+  border-radius: 5px;
   display: flex;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
-div ul {
+.order-items ul {
   list-style-type: none;
+  margin-top: auto;
+  margin-bottom: auto;
 }
-div img {
-  width: 500px;
+.order-items ul li {
+  font-weight: bold;
+  font-size: 25px;
+}
+.order-items img {
+  width: 300px;
 }
 
 /*# sourceMappingURL=order_status.css.map */

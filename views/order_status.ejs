@@ -20,17 +20,18 @@
 
   <body>
     <%- include('partials/_status_header') %>
-    <main style="margin: 1em;">
-      <h1>Your Order</h1>
-        <article>
+    <main>
+      <h1>Thank you for your order!</h1>
+        <article id="order-container">
           <% for(let orderList of orderLists) { %>
             <% if(orderList.quantity) { %>
-              <div>
+              <div class="order-items">
                 <tr>
                   <td><img src=<%= orderList.image_url %> alt='image here'></td>
                   <ul>
                     <li>Total: $<%= (orderList.quantity*orderList.price).toFixed(2) %></li>
-                    <li><%= orderList.name %> x <%= orderList.quantity %> ($<%= orderList.price %> each)</li>
+                    <li><%= orderList.name %> x <%= orderList.quantity %></li>
+                    <li>($<%= orderList.price %> each)</li>
                   </ul>
                 </tr>
               </div>
