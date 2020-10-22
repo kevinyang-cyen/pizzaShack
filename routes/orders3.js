@@ -27,8 +27,8 @@ module.exports = (db) => {
 
     let pizzaInCart = cartHelper(cart);
 
-    console.log("ORDER3", reelPizza, "reelPizza from session storage");
-    console.log("ORDER3", newPizzaInCart, "new pizza, hardcoded");
+    // console.log("ORDER3", reelPizza, "reelPizza from session storage");
+    // console.log("ORDER3", newPizzaInCart, "new pizza, hardcoded");
     // console.log(pizzaInCart, 'PIZZA in CART');
     const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`;
     // console.log(query, "query");
