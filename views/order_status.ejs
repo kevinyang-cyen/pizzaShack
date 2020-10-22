@@ -29,8 +29,8 @@
                 <tr>
                   <td><img src=<%= orderList.image_url %> alt='image here'></td>
                   <ul>
-                    <li>Total $:<%= orderList.quantity*orderList.price %></li>
-                    <li><%= orderList.quantity %> x <%= orderList.name %></li>
+                    <li>Total: $<%= orderList.quantity*orderList.price %></li>
+                    <li><%= orderList.name %> x <%= orderList.quantity %> ($<%= orderList.price %> each)</li>
                     <li><%= orderList.ingredients %></li>
                   </ul>
                 </tr>
