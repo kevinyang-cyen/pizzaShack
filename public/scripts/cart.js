@@ -1,5 +1,5 @@
-$(document).ready(function() {
-  const slugify = function(str) {
+$(document).ready(function () {
+  const slugify = function (str) {
     return str.replace(' ', '-').toLowerCase();
   }
 
@@ -36,7 +36,11 @@ $(document).ready(function() {
     e.preventDefault();
     const formData = new FormData(e.target);
     console.log(formData, "formData in update cart")
-    const quantity = formData.get('quantity');
+    const quantityInput = formData.get('quantity');
+    //settung max quanity to ten
+    const quantityMax = (quantityInput <= 10) ? quantityInput : 10;
+    //setting min quantity to 0 to handle negative inputs
+    const quantity = (quantityMax >= 0) ? quantityMax : 0;
     const pizzaName = formData.get('pizzaName');
     console.log({ quantity, pizzaName })
     window.setCart(pizzaName, quantity);
