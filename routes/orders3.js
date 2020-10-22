@@ -144,15 +144,19 @@ module.exports = (db) => {
         .catch(e => res.json({error: e.message }));
 
       setTimeout(function() {
-        client.messages.create({
-          body: 'Your Order is Ready!',
-          to: `${toNumber}`,  // REPLACE WITH phoneNumber AFTER
-          from: '+16502414473' // From a valid Twilio number
+        db.query(`SELECT phone_number FROM orders WHERE id = $1`, [order_id])
+        .then(res => {
+          client.messages.create({
+            body: 'Your Order is Ready!',
+            to: `${res.rows[0].phone_number}`,  // REPLACE WITH phoneNumber AFTER
+            from: '+16502414473' // From a valid Twilio number
+          })
+            .then((message) => {
+              console.log("text sent");
+              console.log(message.sid);
+            });
         })
-          .then((message) => {
-            console.log("text sent");
-            console.log(message.sid);
-          });
+        .catch(e => res.json(e));
 
         db.query(`
           UPDATE orders

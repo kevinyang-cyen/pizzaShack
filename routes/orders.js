@@ -27,11 +27,11 @@ module.exports = (db) => {
 
 
   router.post("/", (req, res) => {
-    const pizza = Object.keys(req.body).toString()
-    const quantity = req.body[pizza];
-    cart[pizza] = quantity;
+    // const pizza = Object.keys(req.body).toString()
+    // const quantity = req.body[pizza];
+    // cart[pizza] = quantity;
     res.redirect("/")
-    
+
   });
   return router;
 };

@@ -7,7 +7,7 @@ CREATE TABLE orders (
   phone_number VARCHAR(12) NOT NULL,
   received_at TIMESTAMP DEFAULT now(),
   completed_at TIMESTAMP,
-  order_status VARCHAR(50) DEFAULT 'pending'
+  order_status VARCHAR(50) DEFAULT 'Pending'
 );
 
 CREATE TABLE pizzas (
