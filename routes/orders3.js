@@ -21,9 +21,13 @@ let client = new twilio(accountSid, authToken);
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    let reelPizza = window.userCart;
+    let newPizzaInCart = cartHelper(reelPizza);
+
     let pizzaInCart = cartHelper(cart);
 
-
+    console.log("ORDER3", reelPizza, "reelPizza from session storage");
+    console.log("ORDER3", newPizzaInCart, "new pizza, hardcoded");
     // console.log(pizzaInCart, 'PIZZA in CART');
     const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`;
     // console.log(query, "query");
