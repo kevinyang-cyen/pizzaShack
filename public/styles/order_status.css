@@ -5,3 +5,7 @@ div {
 div ul {
   list-style-type: none;
 }
+
+div img {
+  width: 500px;
+}

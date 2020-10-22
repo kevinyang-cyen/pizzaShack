@@ -49,7 +49,9 @@ module.exports = (db) => {
     const findPizzaQuery = 'SELECT id FROM pizzas WHERE name = $1;';
     let orderMessage = 'New Order!\n';
     for (const item in req.body.cart) {
-      orderMessage += `${req.body.cart[item]} x ${item}\n`;
+      if (req.body.cart[item] != 0) {
+        orderMessage += `${req.body.cart[item]} x ${item}\n`;
+      }
     }
 
     db.query(orderQuery, [name, phone])
