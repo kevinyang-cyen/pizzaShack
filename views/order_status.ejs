@@ -29,7 +29,7 @@
                 <tr>
                   <td><img src=<%= orderList.image_url %> alt='image here'></td>
                   <ul>
-                    <li>Total: $<%= (orderList.quantity*orderList.price).toFixed(2) %></li>
+                    <li><b>Subtotal: $<%= (orderList.quantity*orderList.price).toFixed(2) %></b></li>
                     <li><%= orderList.name %> x <%= orderList.quantity %></li>
                     <li>($<%= orderList.price %> each)</li>
                   </ul>
@@ -41,6 +41,9 @@
       <form method="POST" action="/status">
         <button type="hidden" class="btn btn-info"></button>
       </form>
+      <h1>Subtotal: <%= subtotal.toFixed(2) %></h1>
+      <h1>Tax: <%= (subtotal*0.06).toFixed(2) %></h1>
+      <h1>Total: <%= (subtotal*1.06).toFixed(2) %></h1>
       <h1>Your Order Status: <%= orderLists[0].order_status %></h1>
       <h1>Estimated Total Time: <%= minutes %> minutes</h1>
     </main>

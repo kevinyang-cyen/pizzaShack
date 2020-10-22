@@ -110,7 +110,13 @@ module.exports = (db) => {
     `, [req.params.id])
       .then(data => {
         const orderLists = data.rows;
-        const templateVars = {orderLists, minutes};
+        let subtotal = 0;
+        for (let orderList of orderLists) {
+          if(orderList.quantity) {
+            subtotal += orderList.quantity*orderList.price;
+          }
+        }
+        const templateVars = {orderLists, minutes, subtotal};
         console.log(templateVars);
         res.render("order_status", templateVars);
       })
