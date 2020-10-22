@@ -21,8 +21,9 @@ let client = new twilio(accountSid, authToken);
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let reelPizza = window.userCart;
-    let newPizzaInCart = cartHelper(reelPizza);
+    // let reelPizza = window.userCart;
+    // let newPizzaInCart = cartHelper(reelPizza);
+
 
     let pizzaInCart = cartHelper(cart);
 
