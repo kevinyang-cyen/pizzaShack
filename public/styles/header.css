@@ -1,7 +1,7 @@
 header {
   display: flex;
   background-color: #EEBA0B;
-  margin-top: 100px;
+  margin-top: 120px;
 }
 
 header nav {
@@ -13,7 +13,7 @@ header nav {
   align-items: center;
   position: fixed;
   top: 0;
-  height: 80px;
+  height: 100px;
   background-color: #EEBA0B;
   padding: 20px;
 }
