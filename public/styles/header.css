@@ -1,7 +1,7 @@
 header {
   display: flex;
-  padding: 20px;
   background-color: #EEBA0B;
+  margin-top: 100px;
 }
 
 header nav {
@@ -11,6 +11,11 @@ header nav {
   font-family: 'Knewave', cursive;
   width: 100%;
   align-items: center;
+  position: fixed;
+  top: 0;
+  height: 80px;
+  background-color: #EEBA0B;
+  padding: 20px;
 }
 
 header nav .logo {

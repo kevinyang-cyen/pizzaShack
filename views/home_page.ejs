@@ -17,6 +17,7 @@
   <body>
     <%- include('partials/_header') %>
     <main style="margin: 1em;">
+      <p class="welcome">Welcome to pizza shack. We make fresh pizzas and fresh websites to go with them. Get your order started by adding a pizza to cart.</p>
       <h3>Our Menu</h3>
       <div class= "pizza-item-container"> 
       <span id="pizza-list" data-pizzas="<%= pizzas.map((p) => p.name).join(',') %>"></span>
