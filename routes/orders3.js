@@ -8,7 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const cart = require("./cart.js");
-const cartHelper = require("../helperFunctions/cartHelper.js")
+const cartHelper = require("../helperFunctions/cartHelper.js");
 
 //twilio
 let accountSid = process.env.TWILIO_SID; // Your Account SID from www.twilio.com/console
@@ -25,7 +25,7 @@ module.exports = (db) => {
 
 
     // console.log(pizzaInCart, 'PIZZA in CART');
-    const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`
+    const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`;
     // console.log(query, "query");
     db.query(query)
       .then(data => {
@@ -45,68 +45,45 @@ module.exports = (db) => {
     const name = req.body.name;
     const phone = req.body.contactNumber;
     const orderQuery = `INSERT INTO orders (name, phone_number) VALUES ($1, $2) RETURNING *;`;
-    const ordersStatusQuery = 'INSERT INTO pizzas_orders (pizza_id, order_id, quantity) VALUES ($1, $2, $3);';
+    const ordersStatusQuery = 'INSERT INTO pizzas_orders (pizza_id, order_id, quantity) VALUES ($1, $2, $3) RETURNING *;';
     const findPizzaQuery = 'SELECT id FROM pizzas WHERE name = $1;';
-    const order_id = 0;
     let orderMessage = 'New Order!\n';
     for (const item in req.body.cart) {
-      orderMessage += `${req.body.cart[item]} x ${item}\n`
+      orderMessage += `${req.body.cart[item]} x ${item}\n`;
     }
 
     db.query(orderQuery, [name, phone])
       .then(data => {
+        orderMessage += `Order ID: ${data.rows[0].id}`;
         for (const item in req.body.cart) {
           db.query(findPizzaQuery, [item])
-          .then(idData => {
-            db.query(ordersStatusQuery, [idData.rows[0].id, data.rows[0].id, req.body.cart[item]])
-            .then(insertData => res.json(insertData));
-          })
+            .then(idData => {
+              db.query(ordersStatusQuery, [idData.rows[0].id, data.rows[0].id, req.body.cart[item]]);
+            })
+            .catch(err => console.log(err));
         }
+        return data.rows[0].id;
+      })
+      .then(order => {
+        res.json({order});
+        // res.redirect(`/order/${order}`);
       })
       .catch(err => {
+        console.log(err);
         res
           .status(500)
           .json({ error: err.message });
+      })
+
+      .then(res => {
+        client.messages.create({
+          body: orderMessage,
+          to: `${toNumber}`,  // Text this number
+          from: '+16502414473' // From a valid Twilio number
+        });
       });
 
-    client.messages.create({
-      body: orderMessage,
-      to: `${toNumber}`,  // Text this number
-      from: '+16502414473' // From a valid Twilio number
-    })
-      .then((message) => {
-          // console.log("text sent");
-          res.redirect(`/order/${order_id}`);
-          // console.log(message.sid);
-        console.log("text sent");
-        // res.redirect("/status");
-        console.log(message.sid);
-      });
-      res.send('ok')
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   let minutes = 0;
   router.get('/:id', (req, res) => {
@@ -131,7 +108,9 @@ module.exports = (db) => {
   });
 
   router.post('/:id', (req, res) => {
-    minutes = parseInt(req.body.Body);
+    let body = req.body.Body.split(' ');
+    minutes = parseInt(body[1]);
+    let order_id = parseInt(body[0]);
     let phoneNumber = '+16502414473'; // PHONE NUMBER OF CUSTOMER HERE
 
     if (!minutes) {
@@ -144,8 +123,10 @@ module.exports = (db) => {
           JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
           JOIN orders ON pizzas_orders.order_id = orders.id) as subquery
           WHERE orders.id = $1;
-        `, [req.params.id])
-        .then(data => {res.json(data);})
+        `, [order_id])
+        .then(data => {
+          res.json(data);
+        })
         .catch(e => res.json({error: e.message }));
     } else if (minutes) {
       db.query(`
@@ -155,9 +136,11 @@ module.exports = (db) => {
           FROM pizzas
           JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
           JOIN orders ON pizzas_orders.order_id = orders.id) as subquery
-          WHERE orders.phone_number = $1;
-        `, [req.params.id])
-        .then(data => {res.json(data);})
+          WHERE orders.id = $1;
+        `, [order_id])
+        .then(data => {
+          res.json(data);
+        })
         .catch(e => res.json({error: e.message }));
 
       setTimeout(function() {
@@ -178,13 +161,16 @@ module.exports = (db) => {
             FROM pizzas
             JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
             JOIN orders ON pizzas_orders.order_id = orders.id) as subquery
-          WHERE orders.phone_number = $1;
-          `, [phoneNumber])
-          .then(data => {res.json(data);})
+          WHERE orders.id = $1;
+          `, [order_id])
+          .then(data => {
+            res.json(data);
+          })
           .catch(e => res.json({error: e.message }));
 
         minutes = 0;
       }, minutes * 60 * 1000);
+
     }
   });
 

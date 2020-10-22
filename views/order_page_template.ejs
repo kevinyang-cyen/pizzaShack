@@ -134,6 +134,9 @@
       $.ajax('/order', {
         method: 'POST',
         data: orderObject
+      })
+      .then(res => {
+          window.location.href=`/order/${res.order}`;
       });
 
       // clear cart
