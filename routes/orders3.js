@@ -99,10 +99,9 @@ module.exports = (db) => {
 
   });
 
-  let minutes = 0;
   router.get('/:id', (req, res) => {
     db.query(`
-    SELECT orders.id, pizzas.name as name, pizzas.ingredients as ingredients, price, image_url, orders.order_status, pizzas_orders.quantity
+    SELECT orders.id, orders.time, pizzas.name as name, pizzas.ingredients as ingredients, price, image_url, orders.order_status, pizzas_orders.quantity
     FROM pizzas
     JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
     JOIN orders ON pizzas_orders.order_id = orders.id
@@ -116,7 +115,7 @@ module.exports = (db) => {
             subtotal += orderList.quantity*orderList.price;
           }
         }
-        const templateVars = {orderLists, minutes, subtotal};
+        const templateVars = {orderLists, subtotal};
         console.log(templateVars);
         res.render("order_status", templateVars);
       })
@@ -129,7 +128,7 @@ module.exports = (db) => {
 
   router.post('/:id', (req, res) => {
     let body = req.body.Body.split(' ');
-    minutes = parseInt(body[1]);
+    let minutes = parseInt(body[1]);
     let order_id = parseInt(body[0]);
     let phoneNumber = '+16502414473'; // PHONE NUMBER OF CUSTOMER HERE
 
@@ -151,13 +150,13 @@ module.exports = (db) => {
     } else if (minutes) {
       db.query(`
         UPDATE orders
-        SET order_status = 'Accepted'
+        SET order_status = 'Accepted', time = $1
         FROM (SELECT orders.id, pizzas.name as name, price, image_url, orders.order_status, pizzas_orders.quantity
           FROM pizzas
           JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
           JOIN orders ON pizzas_orders.order_id = orders.id) as subquery
-          WHERE orders.id = $1;
-        `, [order_id])
+          WHERE orders.id = $2;
+        `, [minutes, order_id])
         .then(data => {
           res.json(data);
         })
@@ -180,7 +179,7 @@ module.exports = (db) => {
 
         db.query(`
           UPDATE orders
-          SET order_status = 'Completed'
+          SET order_status = 'Completed', time = 0
           FROM (SELECT orders.id, pizzas.name as name, price, image_url, orders.order_status, pizzas_orders.quantity
             FROM pizzas
             JOIN pizzas_orders ON pizzas_orders.pizza_id = pizzas.id
@@ -191,8 +190,6 @@ module.exports = (db) => {
             res.json(data);
           })
           .catch(e => res.json({error: e.message }));
-
-        minutes = 0;
       }, minutes * 60 * 1000);
 
     }
