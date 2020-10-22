@@ -4,19 +4,19 @@ $primary-color: #333;
 body {
   font: 100% $font-stack;
   color: $primary-color;
-  display: flexbox;
+  display: flex;
   flex-direction: column;
   background-color: pink;
 }
 article.cart-items{
   background-color: red;
-  display: flexbox;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   font-weight: 300;
 }
-class.one-pizza{
-  display: flexbox;
+div.one-pizza{
+  display: flex;
   justify-content: center;
   background-color: teal;
 }
