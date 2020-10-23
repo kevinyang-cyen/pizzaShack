@@ -18,10 +18,10 @@ PizzaShack is a web based food ordering system which allows customers to place o
 
 1. Fork this repository, then clone your fork of this repository.
 2. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`, change TO_NUMBER to 'restaurant' phone number, and TWILIO_SID and TWILIO_TOKEN with Twilio account information. Ensure that your restaurant phone number is verified on Twilio.
-3. Update the .env file with your correct local information 
-  - username: `labber` 
-  - password: `labber` 
-  - database: `midterm`
+3. Update the .env file with your psql database information
+  - username
+  - password
+  - database
 4. Install dependencies: `npm i`
 5. Fix to binaries for sass: `npm rebuild node-sass`
 6. Reset database: `npm run db:reset`
@@ -38,4 +38,3 @@ PizzaShack is a web based food ordering system which allows customers to place o
 - NPM 5.x or above
 - PG 6.x or above (use 8.x if not working)
 - SASS 6.x
-
