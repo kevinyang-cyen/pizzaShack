@@ -62,3 +62,11 @@ h3 {
   max-width: 450px;
   padding-top: 20px;
 }
+
+input.form-class {
+  padding-bottom: 10px;
+}
+
+input.form-control {
+  margin-bottom: 10px;
+}
