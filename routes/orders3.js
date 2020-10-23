@@ -7,7 +7,6 @@
 
 const express = require('express');
 const router = express.Router();
-const cart = require("./cart.js");
 const cartHelper = require("../helperFunctions/cartHelper.js");
 
 //twilio
@@ -42,7 +41,7 @@ module.exports = (db) => {
     db.query(query)
       .then(data => {
         const pizzas = data.rows;
-        const templateVars = { pizzas, cart };
+        const templateVars = { pizzas };
         // console.log(templateVars, 'template vars');
         res.render("order_page_template", templateVars);
       })
