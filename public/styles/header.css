@@ -1,9 +1,10 @@
-header {
+.site-header {
   display: flex;
   background-color: #EEBA0B;
   margin-top: 120px;
 }
-header nav {
+
+.site-header nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -16,13 +17,15 @@ header nav {
   background-color: #EEBA0B;
   padding: 20px;
 }
-header nav .logo {
+
+.site-header nav .logo {
   color: #710000;
   font-family: "Knewave", cursive;
   font-size: 35px;
   text-decoration: none;
 }
-header nav #cart-button {
+
+.site-header nav #cart-button {
   background-color: #710000;
   color: #EEBA0B;
   border-radius: 25px;
