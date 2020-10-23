@@ -79,3 +79,28 @@ input.form-class{
  input.form-control{
    margin-bottom: 10px;
  }
+
+
+
+ @media only screen and (max-width: 420px) {
+  .cart-items .one-pizza {
+    flex-direction: column;
+    display: flex;
+    padding-left:0;
+    img {
+      padding-left:0;
+      flex:1;
+      width: 95%;
+      margin:auto;
+    }
+    .pizza-title{
+      padding-left:10px;
+      padding-right:10px;
+      width: 100%;
+
+    }
+    #submit-order{
+      padding-left:10px;
+    }
+  }
+}
