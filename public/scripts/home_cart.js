@@ -18,7 +18,9 @@ $(document).ready(() => {
   function updateHeaderCart() {
     let count = 0;
     Object.entries(window.userCart).forEach(([pizzaName, quantity]) => {
-      count += parseInt(quantity);
+      if (quantity !== "") {
+        count += parseInt(quantity);
+      }
     })
     const quantityLabel = $(`#cart-button`);
     quantityLabel.text(`View Cart (${count})`);
