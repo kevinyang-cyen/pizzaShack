@@ -9,47 +9,29 @@ body {
   flex-direction: column;
   // background-color: pink;
 }
-article.cart-items{
+.cart-items{
   // background-color: red;
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-weight: 300;
 
-  .one-pizza {
-    display: flex;
-    margin-top: 10px;
-    border-bottom: 1px solid #E0E0E0;
-    padding-bottom: 10px;
-    padding-left: 10px;
+}
 
-    img {
-      flex: 1;
-      width: 30%;
-    }
+.one-pizza{
+
+  justify-content: space-around;
+  display: flex;
+  margin-top: 10px;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  &.zero-pizza{
+    display: none;
+  }
+  img {
+    flex: 1;
+    width: 30%;
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-div.one-pizza{
-  display: flex;
-  flex-direction: column;
-
-  justify-content: space-around;
-}
-article.cart-items div.zero-pizza{
-  display: none;
-}
