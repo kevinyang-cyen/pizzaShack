@@ -113,7 +113,6 @@ module.exports = (db) => {
           }
         }
         const templateVars = {orderLists, subtotal};
-        console.log(templateVars);
         res.render("order_status", templateVars);
       })
       .catch(err => {

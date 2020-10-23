@@ -21,27 +21,6 @@ module.exports = (db) => {
     // pizzaName is our key for the cart
     cart[pizzaName] = quantity;
     res.json(cart);
-    // console.log(req.params)
-    // cart[id]= req.params.quantity;
-    // // re renders page after cart item updated
-    // let pizzaInCart = cartHelper(cart);
-
-
-    // console.log(pizzaInCart, 'PIZZA in CART');
-    // const query = `SELECT * from pizzas WHERE name = ANY(array[${pizzaInCart}]);`
-    // console.log(query, "query");
-    // db.query(query)
-    //   .then(data => {
-    //     const pizzas = data.rows;
-    //     const templateVars = { pizzas, cart };
-    //     console.log(templateVars, 'template vars');
-    //     res.render("order_page_template", templateVars);
-    //   })
-    //   .catch(err => {
-    //     res
-    //       .status(500)
-    //       .json({ error: err.message });
-    //   });
   });
 
 
