@@ -31,6 +31,6 @@ div.one-pizza {
   justify-content: space-around;
 }
 
-div.zero-pizza {
+article.cart-items div.zero-pizza {
   display: none;
 }

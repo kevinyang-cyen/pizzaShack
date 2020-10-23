@@ -26,7 +26,7 @@
       <% for( let pizza of pizzas) { %>
       <div id="pizza-<%= pizza.name.replace(' ', '-').toLowerCase() %>" class="one-pizza <%= pizza.quantity ? '' : 'zero-pizza' %>" >
         <h2> <%= pizza.name %> </h2>
-
+        <h4>Quantity</h4>
         <img src="<%=pizza.image_url %>">
         <div class="pizza-details">
           <form method="POST" id="cart-update-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
