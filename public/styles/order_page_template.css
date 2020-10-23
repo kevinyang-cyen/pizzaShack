@@ -1,0 +1,36 @@
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+article.cart-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 300;
+}
+
+article.cart-items .one-pizza {
+  display: flex;
+  margin-top: 10px;
+  border-bottom: 1px solid #E0E0E0;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+article.cart-items .one-pizza img {
+  flex: 1;
+  width: 30%;
+}
+
+div.one-pizza {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+div.zero-pizza {
+  display: none;
+}
