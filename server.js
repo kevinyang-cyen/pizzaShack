@@ -32,13 +32,13 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
+
 const homepageRoutes = require("./routes/homepage");
 const getCart = require('./routes/orders.js')
 const cartRoutes = require('./routes/cartRoutes.js');
 const updateCart = require('./routes/cartRoutes.js')
 // Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
+
 
 
 app.use("/", homepageRoutes(db));
