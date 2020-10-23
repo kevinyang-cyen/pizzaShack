@@ -11,7 +11,7 @@ PizzaShack is a web based food ordering system which allows customers to place o
 ![Screenshot of order status page](https://github.com/kevinyang-cyen/pizzaShack/blob/master/images/3.PNG?raw=true) \
 ![Screenshot of mobile home page](https://github.com/kevinyang-cyen/pizzaShack/blob/master/images/m1.PNG?raw=true) \
 ![Screenshot of mobile view cart page](https://github.com/kevinyang-cyen/pizzaShack/blob/master/images/m2.PNG?raw=true) \
-![Screenshot of mobile order status page](https://github.com/kevinyang-cyen/pizzaShack/blob/master/images/m3.PNG?raw=true) \
+![Screenshot of mobile order status page](https://github.com/kevinyang-cyen/pizzaShack/blob/master/images/m3.PNG?raw=true) 
 
 
 ## Getting Started
