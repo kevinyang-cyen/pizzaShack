@@ -28,12 +28,13 @@ body {
 
 .one-pizza img {
   flex: 1;
-  width: 30%;
+  width: 20%;
 }
 
 .pizza-title {
   padding-left: 10px;
   padding-right: 10px;
+  width: 50%;
 }
 
 @media only screen and (max-width: 420px) {
@@ -53,9 +54,12 @@ form {
 }
 
 h2 {
-  padding-left: 10px;
   padding-top: 10px;
   font-weight: 400px;
+}
+
+h1 {
+  padding-left: 10px;
 }
 
 #submit-order {

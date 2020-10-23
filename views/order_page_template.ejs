@@ -20,7 +20,7 @@
 <body>
   <%- include('partials/_status_header') %>
   <div class="page">
-    <h2>Your Order</h2>
+    <h1>Your Order</h1>
     <article class="cart-items">
       <span id="pizza-list" data-pizzas="<%= pizzas.map((p) => p.name).join(',') %>"></span>
       <% for( let pizza of pizzas) { %>
@@ -30,7 +30,7 @@
         <img alt="" src="<%=pizza.image_url %>">
         <header class="pizza-title">
           <h2><%= pizza.name %> </h2>
-          <h5>Ingredients: <%= pizza.ingredients%></h5>
+          <h6>Ingredients: <%= pizza.ingredients%></h6>
           <h5>Price: $<%= pizza.price %></h5>
         </header>
         <div>
