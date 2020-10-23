@@ -42,7 +42,6 @@ module.exports = (db) => {
       .then(data => {
         const pizzas = data.rows;
         const templateVars = { pizzas };
-        // console.log(templateVars, 'template vars');
         res.render("order_page_template", templateVars);
       })
       .catch(err => {
@@ -79,7 +78,6 @@ module.exports = (db) => {
       })
       .then(order => {
         res.json({order});
-        // res.redirect(`/order/${order}`);
       })
       .catch(err => {
         console.log(err);
@@ -128,9 +126,7 @@ module.exports = (db) => {
   router.post('/:id', (req, res) => {
     let body = req.body.Body.split(' ');
     let minutes = parseInt(body[1]);
-    console.log(minutes);
     let order_id = parseInt(body[0]);
-    let phoneNumber = '+16502414473'; // PHONE NUMBER OF CUSTOMER HERE
 
     if (!minutes) {
       minutes = 'Sorry your order was declined!';
@@ -158,7 +154,6 @@ module.exports = (db) => {
           WHERE orders.id = $2;
         `, [minutes, order_id])
         .then(data => {
-          console.log('test 1');
           res.json(data);
         })
         .catch(e => res.json({error: e.message }));
@@ -168,7 +163,7 @@ module.exports = (db) => {
         .then(res => {
           client.messages.create({
             body: 'Your Order is Ready!',
-            to: `${res.rows[0].phone_number}`,  // REPLACE WITH phoneNumber AFTER
+            to: `${res.rows[0].phone_number}`,
             from: '+16502414473' // From a valid Twilio number
           })
             .then((message) => {
