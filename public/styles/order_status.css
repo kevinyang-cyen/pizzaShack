@@ -4,23 +4,19 @@ body main {
   flex-direction: column;
   align-items: center;
 }
-
 body article {
   display: flex;
   flex-direction: column;
   color: black;
 }
-
 body h1 {
   margin: auto;
   font-size: 35px;
   margin-top: 10px;
 }
-
 body h2 {
   margin: auto;
 }
-
 body #thank-you {
   margin-top: 15px;
 }
@@ -34,17 +30,14 @@ body #thank-you {
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
-
 .order-items ul {
   list-style-type: none;
   margin-top: auto;
   margin-bottom: auto;
 }
-
 .order-items ul li {
   font-size: 25px;
 }
-
 .order-items img {
   width: 300px;
 }
@@ -81,3 +74,5 @@ body #thank-you {
     font-size: 25px;
   }
 }
+
+/*# sourceMappingURL=order_status.css.map */
