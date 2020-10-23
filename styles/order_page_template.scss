@@ -102,5 +102,11 @@ input.form-class{
     #submit-order{
       padding-left:10px;
     }
+    [id^="cart-update"]{
+      padding-left:10px;
+    }
+    [id^="cart-delete"]{
+      padding-left:10px;
+    }
   }
 }

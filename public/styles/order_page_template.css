@@ -96,4 +96,10 @@ input.form-control {
   .cart-items .one-pizza #submit-order {
     padding-left: 10px;
   }
+  .cart-items .one-pizza [id^="cart-update"] {
+    padding-left: 10px;
+  }
+  .cart-items .one-pizza [id^="cart-delete"] {
+    padding-left: 10px;
+  }
 }
