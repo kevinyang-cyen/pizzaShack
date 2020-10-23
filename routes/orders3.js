@@ -128,6 +128,7 @@ module.exports = (db) => {
   router.post('/:id', (req, res) => {
     let body = req.body.Body.split(' ');
     let minutes = parseInt(body[1]);
+    console.log(minutes);
     let order_id = parseInt(body[0]);
     let phoneNumber = '+16502414473'; // PHONE NUMBER OF CUSTOMER HERE
 
@@ -157,6 +158,7 @@ module.exports = (db) => {
           WHERE orders.id = $2;
         `, [minutes, order_id])
         .then(data => {
+          console.log('test 1');
           res.json(data);
         })
         .catch(e => res.json({error: e.message }));
@@ -189,7 +191,7 @@ module.exports = (db) => {
             res.json(data);
           })
           .catch(e => res.json({error: e.message }));
-      }, minutes * 3 * 1000);
+      }, minutes * 2 * 1000);
 
     }
   });

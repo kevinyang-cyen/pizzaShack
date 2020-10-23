@@ -8,7 +8,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="/styles/order_page.css">
+  <link rel="stylesheet" href="/styles/order_page_template.css">
   <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
   <!-- Fonts -->
@@ -19,24 +19,27 @@
 
 <body>
   <%- include('partials/_status_header') %>
-  <div>
-    <h3>Your Order</h3>
+  <div class="page">
+    <h1>Your Order</h1>
     <article class="cart-items">
       <span id="pizza-list" data-pizzas="<%= pizzas.map((p) => p.name).join(',') %>"></span>
       <% for( let pizza of pizzas) { %>
-      <div id="pizza-<%= pizza.name.replace(' ', '-').toLowerCase() %>" class="one-pizza <%= pizza.quantity ? '' : 'zero-pizza' %>" >
-        <h2> <%= pizza.name %> </h2>
-        <h4>Quantity</h4>
-        <img src="<%=pizza.image_url %>">
+      <div id="pizza-<%= pizza.name.replace(' ', '-').toLowerCase() %>"
+        class="one-pizza <%= pizza.quantity ? '' : 'zero-pizza' %>">
+
+        <img alt="" src="<%=pizza.image_url %>">
+        <header class="pizza-title">
+          <h2><%= pizza.name %> </h2>
+          <h6>Ingredients: <%= pizza.ingredients%></h6>
+          <h5>Price: $<%= pizza.price %></h5>
+        </header>
         <div>
           <form method="POST" id="cart-update-<%= pizza.name.replace(' ', '-').toLowerCase() %>">
-            <h5>Ingredients: <%= pizza.ingredients%></h5>
-            <h5>Price: $<%= pizza.price %></h5>
-            <h5>Approx time of delivery</h5>
+
             <label for="pizzaQuantity" id="quantity-<%= pizza.name.replace(' ', '-').toLowerCase() %>">Quantity 0
             </label>
             <input id="quantity-input-<%= pizza.name.replace(' ', '-').toLowerCase() %>" type="text" name="quantity"
-              class="form-control" >
+              class="form-control">
 
             <div>
               <input type="hidden" name="pizzaName" value="<%= pizza.name %>" />
@@ -51,11 +54,6 @@
       </div>
       <% } %>
     </article>
-    <img src="https://picsum.photos/100">
-
-    <div>
-      <button type="button" class="btn btn-warning">Add Your Details Here</button>
-    </div>
 
     <div>
       <form method="POST" id="submit-order">
