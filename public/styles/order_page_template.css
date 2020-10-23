@@ -29,3 +29,14 @@ body {
   flex: 1;
   width: 30%;
 }
+
+@media only screen and (max-width: 420px) {
+  .cart-items .one-pizza {
+    flex-direction: column;
+    display: flex;
+  }
+  .cart-items .one-pizza img {
+    flex: 1;
+    width: 100%;
+  }
+}
