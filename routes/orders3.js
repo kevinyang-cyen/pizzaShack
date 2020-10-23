@@ -189,7 +189,7 @@ module.exports = (db) => {
             res.json(data);
           })
           .catch(e => res.json({error: e.message }));
-      }, minutes * 60 * 1000);
+      }, minutes * 3 * 1000);
 
     }
   });

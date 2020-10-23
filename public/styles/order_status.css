@@ -73,6 +73,9 @@ body #thank-you {
   body main h1 {
     font-size: 25px;
   }
+  body main h2 {
+    font-size: 22px;
+  }
 }
 
 /*# sourceMappingURL=order_status.css.map */
