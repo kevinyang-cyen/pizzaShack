@@ -44,7 +44,7 @@
       <h2>Subtotal: $<%= subtotal.toFixed(2) %></h1>
       <h2>Tax: $<%= (subtotal*0.06).toFixed(2) %></h1>
       <h2><b>Total: $<%= (subtotal*1.06).toFixed(2) %></b></h1>
-      <h1>Your Order Status: <%= orderLists[0].order_status %></h1>
+      <h1 id="order-status">Your Order Status: <%= orderLists[0].order_status %></h1>
       <h1>Estimated Total Time: <%= orderLists[0].time %> minutes</h1>
     </main>
     <script language="JavaScript" type="text/javascript">
