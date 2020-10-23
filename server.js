@@ -36,6 +36,7 @@ app.use(express.static("public"));
 const homepageRoutes = require("./routes/homepage");
 const getCart = require('./routes/orders.js')
 const cartRoutes = require('./routes/cartRoutes.js');
+const updateCart = require('./routes/cartRoutes.js')
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
@@ -43,23 +44,11 @@ const cartRoutes = require('./routes/cartRoutes.js');
 app.use("/", homepageRoutes(db));
 app.use("/order",getCart(db));
 app.use("/modify/:id", cartRoutes(db));
+app.use("/modify", updateCart(db));
+
 // Note: mount other resources here, using the same pattern above
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-
-
-
-
-
-
-
-
-
-
-//nick
-const updateCart = require('./routes/cartRoutes.js')
-
-app.use("/modify", updateCart(db));
