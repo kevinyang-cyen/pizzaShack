@@ -4,7 +4,7 @@
  *   these routes are mounted onto /orders
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
-const cart = require('./cart');
+
 const express = require('express');
 const router  = express.Router();
 
@@ -27,9 +27,6 @@ module.exports = (db) => {
 
 
   router.post("/", (req, res) => {
-    // const pizza = Object.keys(req.body).toString()
-    // const quantity = req.body[pizza];
-    // cart[pizza] = quantity;
     res.redirect("/")
 
   });
