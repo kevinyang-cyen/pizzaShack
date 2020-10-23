@@ -77,6 +77,9 @@ input.form-control {
 }
 
 @media only screen and (max-width: 420px) {
+  .one-pizza.zero-pizza [id^="pizza-"] {
+    display: none;
+  }
   .cart-items .one-pizza {
     flex-direction: column;
     display: flex;
