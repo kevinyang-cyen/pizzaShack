@@ -26,7 +26,6 @@
       <% for( let pizza of pizzas) { %>
       <div id="pizza-<%= pizza.name.replace(' ', '-').toLowerCase() %>"
         class="one-pizza <%= pizza.quantity ? '' : 'zero-pizza' %>">
-
         <img alt="" src="<%=pizza.image_url %>">
         <header class="pizza-title">
           <h2><%= pizza.name %> </h2>
