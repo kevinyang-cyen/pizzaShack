@@ -20,7 +20,7 @@
 <body>
   <%- include('partials/_status_header') %>
   <div class="page">
-    <h3>Your Order</h3>
+    <h2>Your Order</h2>
     <article class="cart-items">
       <span id="pizza-list" data-pizzas="<%= pizzas.map((p) => p.name).join(',') %>"></span>
       <% for( let pizza of pizzas) { %>
